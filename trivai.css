@@ -1,12 +1,12 @@
 /* ==========================================================================
-   Custom styles for TrivAI (Header from homepage; New Blue Gradient Banner)
+   Clean TrivAI CSS (Remove header overrides; Blue Gradient Banner)
    ========================================================================== */
 
 /* ————————————————————————————————————————————————————————————
    1. Base Color & Typography Overrides
    ———————————————————————————————————————————————————————————— */
 
-/* Accent color used throughout TrivAI */
+/* Accent colors used throughout TrivAI */
 :root {
   --trivia-accent: #1e40af;       /* deep blue */
   --trivia-accent-light: #3b82f6; /* bright sky blue */
@@ -198,4 +198,3 @@ body {
   background-color: var(--trivia-accent);
   border-radius: 50%;
 }
-
