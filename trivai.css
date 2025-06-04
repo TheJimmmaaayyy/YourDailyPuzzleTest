@@ -1,43 +1,49 @@
 /* ==========================================================================
-   Custom styles for TrivAI (Updated Header & Headings)
+   Custom styles for TrivAI (New Banner Style)
    ========================================================================== */
 
 /* ————————————————————————————————————————————————————————————
-   0. Header / Navigation Overrides to match homepage
+   0. Header / Navigation Overrides to mimic homepage but align left
    ———————————————————————————————————————————————————————————— */
 
+/* Navbar background and shadow */
 .navbar {
-  background-color: #ffffff; /* White background to match homepage */
+  background-color: #ffffff; /* White background */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Subtle shadow */
   position: relative;
   z-index: 50;
+  width: 100%;
 }
 
+/* Container flexbox for header: align items to left without spacing them apart */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1rem;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start; /* Align items to left */
+  gap: 3rem; /* Space between logo and nav */
 }
 
+/* Logo alignment (left) */
 .logo {
   display: flex;
   align-items: center;
 }
 
+/* Nav links aligned immediately after logo */
 .nav-links {
   display: flex;
   gap: 1.5rem;
 }
 
+/* Style individual nav links */
 .nav-link {
   font-size: 1rem;
   font-weight: 500;
   color: var(--trivia-text);
   transition: color 0.2s ease;
-  position: relative;
   text-decoration: none;
 }
 
@@ -60,10 +66,16 @@
   border-radius: 1px;
 }
 
-/* Ensures nav links wrap properly on smaller screens */
+/* Ensure header wraps on small screens */
 @media (max-width: 640px) {
+  .container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
   .nav-links {
     gap: 1rem;
+    flex-wrap: wrap;
   }
 }
 
@@ -79,6 +91,8 @@
   --trivia-text: #1f2937;         /* almost-black */
   --trivia-card-bg: #ffffff;      /* pure white for cards */
   --trivia-card-border: #e5e7eb;  /* light gray border */
+  --trivia-hero-bg: #f9fafb;      /* very subtle off-white */
+  --trivia-hero-border: #3b82f6;  /* bright sky blue */
 }
 
 /* Body background override (subtle gradient) */
@@ -98,23 +112,23 @@ body {
 }
 
 /* ————————————————————————————————————————————————————————————
-   2. Hero Banner (Heading Updated to match homepage)
+   2. Hero Banner (New Light Style)
    ———————————————————————————————————————————————————————————— */
 
 .trivia-hero {
-  background: var(--trivia-accent-light);
-  background: linear-gradient(135deg, var(--trivia-accent-light) 0%, var(--trivia-accent) 100%);
-  color: #fff;
-  padding: 4rem 0;
+  background-color: var(--trivia-hero-bg);
+  border: 2px solid var(--trivia-hero-border);
+  border-radius: 1rem;
+  padding: 3rem 1rem;
   margin-bottom: 2rem;
-  border-radius: 0 0 1.5rem 1.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .trivia-hero-title {
   font-size: 2.25rem; /* matches text-4xl from homepage */
   font-weight: 700;
-  margin-bottom: 2rem; /* matches mb-8 */
+  margin-bottom: 1rem; /* moderate spacing */
 }
 
 .trivia-hero-subtitle {
@@ -122,6 +136,18 @@ body {
   max-width: 600px;
   margin: 0 auto;
   line-height: 1.6;
+  color: var(--trivia-text);
+}
+
+/* Decorative underline under subtitle */
+.trivia-hero-subtitle::after {
+  content: '';
+  display: block;
+  width: 4rem;
+  height: 2px;
+  background-color: var(--trivia-hero-border);
+  margin: 1rem auto 0;
+  border-radius: 1px;
 }
 
 /* ————————————————————————————————————————————————————————————
@@ -254,32 +280,4 @@ body {
   height: 0.5rem;
   background-color: var(--trivia-accent);
   border-radius: 50%;
-}
-
-/* ————————————————————————————————————————————————————————————
-   6. Utility Overrides
-   ———————————————————————————————————————————————————————————— */
-
-/* Highlight “TrivAI” tab in the main nav using accent */
-.nav-link.active {
-  color: var(--trivia-accent);
-  font-weight: 600;
-}
-
-.nav-link.active::after {
-  content: '';
-  display: block;
-  margin: 0.25rem auto 0;
-  width: 1.5rem;
-  height: 2px;
-  background-color: var(--trivia-accent);
-}
-
-@media (max-width: 640px) {
-  .trivia-hero-title {
-    font-size: 2.25rem;
-  }
-  .trivia-hero-subtitle {
-    font-size: 1rem;
-  }
 }
