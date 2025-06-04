@@ -1,6 +1,71 @@
 /* ==========================================================================
-   Custom styles for TrivAI (Updated Headings)
+   Custom styles for TrivAI (Updated Header & Headings)
    ========================================================================== */
+
+/* ————————————————————————————————————————————————————————————
+   0. Header / Navigation Overrides to match homepage
+   ———————————————————————————————————————————————————————————— */
+
+.navbar {
+  background-color: #ffffff; /* White background to match homepage */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+  position: relative;
+  z-index: 50;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-link {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--trivia-text);
+  transition: color 0.2s ease;
+  position: relative;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  color: var(--trivia-accent-light);
+}
+
+.nav-link.active {
+  color: var(--trivia-accent);
+  font-weight: 600;
+}
+
+.nav-link.active::after {
+  content: '';
+  display: block;
+  margin: 0.25rem auto 0;
+  width: 1.5rem;
+  height: 2px;
+  background-color: var(--trivia-accent);
+  border-radius: 1px;
+}
+
+/* Ensures nav links wrap properly on smaller screens */
+@media (max-width: 640px) {
+  .nav-links {
+    gap: 1rem;
+  }
+}
 
 /* ————————————————————————————————————————————————————————————
    1. Base Color & Typography Overrides
@@ -20,6 +85,10 @@
 body {
   background: linear-gradient(to bottom, var(--trivia-bg) 0%, #ffffff 80%);
   color: var(--trivia-text);
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 /* Override h1/h2 colors if needed */
@@ -42,14 +111,12 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-/* Align hero title with homepage text-4xl and font-bold */
 .trivia-hero-title {
   font-size: 2.25rem; /* matches text-4xl from homepage */
   font-weight: 700;
   margin-bottom: 2rem; /* matches mb-8 */
 }
 
-/* Align hero subtitle with homepage styling (text-lg equivalent) */
 .trivia-hero-subtitle {
   font-size: 1.125rem; /* approximately text-lg */
   max-width: 600px;
