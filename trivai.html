@@ -2,12 +2,229 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>TrivAI – YourDailyPuzzle</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="trivai.css" />
-</head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YourDailyPuzzle Homepage</title>
+  <style>
+    /* CSS Variables for Color Palette */
+    :root {
+      --color-bg: #F2F2F2;        /* light gray page background */
+      --color-bg-alt: #FFFFFF;    /* white for cards or alternate sections */
+      --color-primary: #00A8E8;   /* bright cyan accent */
+      --color-secondary: #F95700; /* vibrant orange accent */
+      --color-text: #222222;      /* dark gray for body text */
+      --color-heading: #111111;   /* near black for headings */
+      --color-link: var(--color-primary);
+      --btn-hover: #008CBF;       /* darker cyan for button hover */
+    }
 
+    /* Global Styles */
+    body {
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    a {
+      color: var(--color-link);
+      text-decoration: none;
+      transition: color 0.2s ease-in-out;
+    }
+    a:hover {
+      color: var(--btn-hover);
+      text-decoration: underline;
+    }
+
+    /* Header */
+    .site-header {
+      background-color: var(--color-bg-alt);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+    .site-header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+    .site-header .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-primary);
+    }
+    .site-header .main-nav a {
+      margin-left: 1.5rem;
+      font-weight: 500;
+      color: var(--color-text);
+    }
+    .site-header .main-nav a:hover {
+      color: var(--color-primary);
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, #00A8E8 0%, #F95700 100%);
+      color: #fff;
+      text-align: center;
+      padding: 6rem 1rem;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+    .hero .hero-buttons a {
+      background-color: #fff;
+      color: var(--color-primary);
+      padding: 0.6rem 1.2rem;
+      border-radius: 4px;
+      font-weight: 600;
+      transition: background 0.2s ease-in-out;
+      display: inline-block;
+      min-width: 120px;
+      text-align: center;
+    }
+    .hero .hero-buttons a:hover {
+      background-color: #f2f2f2;
+    }
+    .hero .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    /* Features Section */
+    .features {
+      background-color: var(--color-bg-alt);
+      padding: 4rem 2rem;
+    }
+    .features .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2rem;
+    }
+    .feature-card {
+      background-color: var(--color-bg-alt);
+      border-radius: 8px;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border: 2px solid var(--color-primary);
+    }
+    .feature-card .icon {
+      margin-bottom: 1rem;
+    }
+    .feature-card h2 {
+      color: var(--color-primary);
+      margin-bottom: 0.75rem;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+    }
+    .feature-card p {
+      color: var(--color-text);
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }
+    .feature-card .btn-primary {
+      background-color: var(--color-secondary);
+      color: #fff;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      font-weight: 500;
+      transition: background 0.2s ease-in-out;
+      display: inline-block;
+      margin-top: 1rem;
+      text-decoration: none;
+    }
+    .feature-card .btn-primary:hover {
+      background-color: #d94800;
+    }
+
+    /* Expanded Mode Detail Sections */
+    .mode-details {
+      background-color: var(--color-bg-alt);
+      padding: 3rem 2rem;
+      margin-top: 1rem;
+    }
+    .mode-details + .mode-details {
+      margin-top: 2rem;
+    }
+    .mode-details h2 {
+      color: var(--color-primary);
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      font-size: 2rem;
+    }
+    .mode-details p {
+      color: var(--color-text);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+    .mode-details .btn-primary {
+      background-color: var(--color-secondary);
+      color: #fff;
+      padding: 0.6rem 1.2rem;
+      border-radius: 4px;
+      font-weight: 500;
+      transition: background 0.2s ease-in-out;
+      display: inline-block;
+    }
+    .mode-details .btn-primary:hover {
+      background-color: #d94800;
+    }
+
+    /* Spot the AI layout */
+    .spot-container {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .spot-container img {
+      max-width: 200px;
+      border-radius: 8px;
+    }
+    /* Responsive: stack on narrow screens */
+    @media (max-width: 768px) {
+      .spot-container {
+        flex-direction: column;
+        text-align: center;
+      }
+      .spot-container img {
+        margin-bottom: 1rem;
+      }
+    }
+
+    /* Utility Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="logo">YourDailyPuzzle.com</a>
+      <nav class="main-nav">
+        <a href="trivai.html">TrivAI</a>
+        <a href="/escape-room">Escape Room</a>
+        <a href="/puzzle">Puzzle Mode</a>
+        <a href="/spot-ai">Spot the AI</a>
+      </nav>
+    </div>
+  </header>
 <body class="bg-light-gray text-dark-font">
 
   <!-- ====== Header / Navigation ====== -->
