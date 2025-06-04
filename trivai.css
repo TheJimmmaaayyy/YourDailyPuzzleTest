@@ -1,83 +1,6 @@
 /* ==========================================================================
-   Custom styles for TrivAI (New Banner Style)
+   Custom styles for TrivAI (Header from homepage; New Blue Gradient Banner)
    ========================================================================== */
-
-/* ————————————————————————————————————————————————————————————
-   0. Header / Navigation Overrides to mimic homepage but align left
-   ———————————————————————————————————————————————————————————— */
-
-/* Navbar background and shadow */
-.navbar {
-  background-color: #ffffff; /* White background */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Subtle shadow */
-  position: relative;
-  z-index: 50;
-  width: 100%;
-}
-
-/* Container flexbox for header: align items to left without spacing them apart */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start; /* Align items to left */
-  gap: 3rem; /* Space between logo and nav */
-}
-
-/* Logo alignment (left) */
-.logo {
-  display: flex;
-  align-items: center;
-}
-
-/* Nav links aligned immediately after logo */
-.nav-links {
-  display: flex;
-  gap: 1.5rem;
-}
-
-/* Style individual nav links */
-.nav-link {
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--trivia-text);
-  transition: color 0.2s ease;
-  text-decoration: none;
-}
-
-.nav-link:hover {
-  color: var(--trivia-accent-light);
-}
-
-.nav-link.active {
-  color: var(--trivia-accent);
-  font-weight: 600;
-}
-
-.nav-link.active::after {
-  content: '';
-  display: block;
-  margin: 0.25rem auto 0;
-  width: 1.5rem;
-  height: 2px;
-  background-color: var(--trivia-accent);
-  border-radius: 1px;
-}
-
-/* Ensure header wraps on small screens */
-@media (max-width: 640px) {
-  .container {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-  }
-  .nav-links {
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-}
 
 /* ————————————————————————————————————————————————————————————
    1. Base Color & Typography Overrides
@@ -91,8 +14,8 @@
   --trivia-text: #1f2937;         /* almost-black */
   --trivia-card-bg: #ffffff;      /* pure white for cards */
   --trivia-card-border: #e5e7eb;  /* light gray border */
-  --trivia-hero-bg: #f9fafb;      /* very subtle off-white */
-  --trivia-hero-border: #3b82f6;  /* bright sky blue */
+  --trivia-hero-gradient-start: #3b82f6; /* light blue */
+  --trivia-hero-gradient-end: #1e3a8a;   /* dark blue */
 }
 
 /* Body background override (subtle gradient) */
@@ -105,30 +28,24 @@ body {
     "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
-/* Override h1/h2 colors if needed */
-.trivia-hero-title,
-.trivia-section-header h2 {
-  color: var(--trivia-accent);
-}
-
 /* ————————————————————————————————————————————————————————————
-   2. Hero Banner (New Light Style)
+   2. Hero Banner (Blue Gradient)
    ———————————————————————————————————————————————————————————— */
 
 .trivia-hero {
-  background-color: var(--trivia-hero-bg);
-  border: 2px solid var(--trivia-hero-border);
-  border-radius: 1rem;
-  padding: 3rem 1rem;
+  background: linear-gradient(135deg, var(--trivia-hero-gradient-start) 0%, var(--trivia-hero-gradient-end) 100%);
+  color: #fff;
+  padding: 4rem 1rem;
   margin-bottom: 2rem;
+  border-radius: 0.75rem;
   text-align: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .trivia-hero-title {
   font-size: 2.25rem; /* matches text-4xl from homepage */
   font-weight: 700;
-  margin-bottom: 1rem; /* moderate spacing */
+  margin-bottom: 1rem;
 }
 
 .trivia-hero-subtitle {
@@ -136,7 +53,7 @@ body {
   max-width: 600px;
   margin: 0 auto;
   line-height: 1.6;
-  color: var(--trivia-text);
+  color: #f3f4f6;
 }
 
 /* Decorative underline under subtitle */
@@ -145,7 +62,7 @@ body {
   display: block;
   width: 4rem;
   height: 2px;
-  background-color: var(--trivia-hero-border);
+  background-color: #ffffff;
   margin: 1rem auto 0;
   border-radius: 1px;
 }
@@ -281,3 +198,4 @@ body {
   background-color: var(--trivia-accent);
   border-radius: 50%;
 }
+
