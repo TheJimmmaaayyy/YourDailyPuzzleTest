@@ -1,6 +1,5 @@
 /* ==========================================================================
-   Custom styles for TrivAI
-   (this file is loaded after styles.css, so it can override shared rules)
+   Custom styles for TrivAI (Updated Headings)
    ========================================================================== */
 
 /* ————————————————————————————————————————————————————————————
@@ -30,7 +29,7 @@ body {
 }
 
 /* ————————————————————————————————————————————————————————————
-   2. Hero Banner
+   2. Hero Banner (Heading Updated to match homepage)
    ———————————————————————————————————————————————————————————— */
 
 .trivia-hero {
@@ -43,14 +42,16 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
+/* Align hero title with homepage text-4xl and font-bold */
 .trivia-hero-title {
-  font-size: 3rem;
+  font-size: 2.25rem; /* matches text-4xl from homepage */
   font-weight: 700;
-  margin-bottom: 0.5rem;
+  margin-bottom: 2rem; /* matches mb-8 */
 }
 
+/* Align hero subtitle with homepage styling (text-lg equivalent) */
 .trivia-hero-subtitle {
-  font-size: 1.25rem;
+  font-size: 1.125rem; /* approximately text-lg */
   max-width: 600px;
   margin: 0 auto;
   line-height: 1.6;
@@ -71,6 +72,13 @@ body {
 .trivia-section-header {
   border-bottom: 1px solid var(--trivia-card-border);
   padding-bottom: 0.5rem;
+}
+
+/* Align section headers to homepage text-2xl and font-semibold */
+.trivia-section-header h2 {
+  font-size: 1.5rem; /* matching text-2xl */
+  font-weight: 600;  /* matching font-semibold */
+  margin-bottom: 0.5rem; /* similar spacing */
 }
 
 .trivia-text {
