@@ -1,0 +1,210 @@
+/* ==========================================================================
+   Custom styles for TrivAI
+   (this file is loaded after styles.css, so it can override shared rules)
+   ========================================================================== */
+
+/* ————————————————————————————————————————————————————————————
+   1. Base Color & Typography Overrides
+   ———————————————————————————————————————————————————————————— */
+
+/* Accent color used throughout TrivAI */
+:root {
+  --trivia-accent: #1e40af;       /* deep blue */
+  --trivia-accent-light: #3b82f6; /* bright sky blue */
+  --trivia-bg: #f3f4f6;           /* very light gray */
+  --trivia-text: #1f2937;         /* almost-black */
+  --trivia-card-bg: #ffffff;      /* pure white for cards */
+  --trivia-card-border: #e5e7eb;  /* light gray border */
+}
+
+/* Body background override (subtle gradient) */
+body {
+  background: linear-gradient(to bottom, var(--trivia-bg) 0%, #ffffff 80%);
+  color: var(--trivia-text);
+}
+
+/* Override h1/h2 colors if needed */
+.trivia-hero-title,
+.trivia-section-header h2 {
+  color: var(--trivia-accent);
+}
+
+/* ————————————————————————————————————————————————————————————
+   2. Hero Banner
+   ———————————————————————————————————————————————————————————— */
+
+.trivia-hero {
+  background: var(--trivia-accent-light);
+  background: linear-gradient(135deg, var(--trivia-accent-light) 0%, var(--trivia-accent) 100%);
+  color: #fff;
+  padding: 4rem 0;
+  margin-bottom: 2rem;
+  border-radius: 0 0 1.5rem 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.trivia-hero-title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.trivia-hero-subtitle {
+  font-size: 1.25rem;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ————————————————————————————————————————————————————————————
+   3. Custom Card Styles
+   ———————————————————————————————————————————————————————————— */
+
+.trivia-card {
+  background: var(--trivia-card-bg);
+  border: 1px solid var(--trivia-card-border);
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.trivia-section-header {
+  border-bottom: 1px solid var(--trivia-card-border);
+  padding-bottom: 0.5rem;
+}
+
+.trivia-text {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--trivia-text);
+}
+
+/* Slight margin between the two cards */
+.trivia-card + .trivia-card {
+  margin-top: 2rem;
+}
+
+/* ————————————————————————————————————————————————————————————
+   4. Inputs & Buttons
+   ———————————————————————————————————————————————————————————— */
+
+.trivia-input {
+  border: 1px solid var(--trivia-card-border);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  background: #fff;
+  color: var(--trivia-text);
+  transition: border-color 0.2s ease;
+}
+
+.trivia-input:focus {
+  outline: none;
+  border-color: var(--trivia-accent);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+/* Primary button for TrivAI */
+.trivia-btn-primary {
+  background-color: var(--trivia-accent);
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.trivia-btn-primary:hover {
+  background-color: var(--trivia-accent-light);
+  transform: translateY(-1px);
+}
+
+.trivia-btn-primary:active {
+  background-color: var(--trivia-accent);
+  transform: translateY(0);
+}
+
+/* Secondary (less prominent) button */
+.trivia-btn-secondary {
+  background-color: #fff;
+  color: var(--trivia-accent);
+  border: 2px solid var(--trivia-accent);
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.75rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
+}
+
+.trivia-btn-secondary:hover {
+  background-color: var(--trivia-accent);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.trivia-btn-secondary:active {
+  background-color: #fff;
+  color: var(--trivia-accent);
+  transform: translateY(0);
+}
+
+/* ————————————————————————————————————————————————————————————
+   5. Quiz Results List
+   ———————————————————————————————————————————————————————————— */
+
+.trivia-questions-list li p {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.trivia-questions-list li ul li {
+  font-size: 0.95rem;
+  margin-left: 0.5rem;
+}
+
+/* Add a subtle accent bar before each list item */
+.trivia-questions-list li {
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.trivia-questions-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.75rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: var(--trivia-accent);
+  border-radius: 50%;
+}
+
+/* ————————————————————————————————————————————————————————————
+   6. Utility Overrides
+   ———————————————————————————————————————————————————————————— */
+
+/* Highlight “TrivAI” tab in the main nav using accent */
+.nav-link.active {
+  color: var(--trivia-accent);
+  font-weight: 600;
+}
+
+.nav-link.active::after {
+  content: '';
+  display: block;
+  margin: 0.25rem auto 0;
+  width: 1.5rem;
+  height: 2px;
+  background-color: var(--trivia-accent);
+}
+
+@media (max-width: 640px) {
+  .trivia-hero-title {
+    font-size: 2.25rem;
+  }
+  .trivia-hero-subtitle {
+    font-size: 1rem;
+  }
+}
