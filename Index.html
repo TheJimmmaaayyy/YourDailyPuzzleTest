@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YourDailyPuzzle Homepage</title>
+  <style>
+    /* CSS Variables for Color Palette */
+    :root {
+      --color-bg: #F2F2F2;        /* light gray page background */
+      --color-bg-alt: #FFFFFF;    /* white for cards or alternate sections */
+      --color-primary: #00A8E8;   /* bright cyan accent */
+      --color-secondary: #F95700; /* vibrant orange accent */
+      --color-text: #222222;      /* dark gray for body text */
+      --color-heading: #111111;   /* near black for headings */
+      --color-link: var(--color-primary);
+      --btn-hover: #008CBF;       /* darker cyan for button hover */
+    }
+
+    /* Global Styles */
+    body {
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    a {
+      color: var(--color-link);
+      text-decoration: none;
+      transition: color 0.2s ease-in-out;
+    }
+    a:hover {
+      color: var(--btn-hover);
+      text-decoration: underline;
+    }
+
+    /* Header */
+    .site-header {
+      background-color: var(--color-bg-alt);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+    .site-header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+    .site-header .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-primary);
+    }
+    .site-header .main-nav a {
+      margin-left: 1.5rem;
+      font-weight: 500;
+      color: var(--color-text);
+    }
+    .site-header .main-nav a:hover {
+      color: var(--color-primary);
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, #00A8E8 0%, #F95700 100%);
+      color: #fff;
+      text-align: center;
+      padding: 6rem 1rem;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+    .hero .hero-buttons a {
+      background-color: #fff;
+      color: var(--color-primary);
+      padding: 0.6rem 1.2rem;
+      border-radius: 4px;
+      font-weight: 600;
+      transition: background 0.2s ease-in-out;
+      display: inline-block;
+      min-width: 120px;
+      text-align: center;
+    }
+    .hero .hero-buttons a:hover {
+      background-color: #f2f2f2;
+    }
+    .hero .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    /* Features Section */
+    .features {
+      background-color: var(--color-bg-alt);
+      padding: 4rem 2rem;
+    }
+    .features .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2rem;
+    }
+    .feature-card {
+      background-color: var(--color-bg-alt);
+      border-radius: 8px;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border: 2px solid var(--color-primary);
+    }
+    .feature-card .icon {
+      margin-bottom: 1rem;
+    }
+    .feature-card h2 {
+      color: var(--color-primary);
+      margin-bottom: 0.75rem;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+    }
+    .feature-card p {
+      color: var(--color-text);
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }
+    .feature-card .btn-primary {
+      background-color: var(--color-secondary);
+      color: #fff;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      font-weight: 500;
+      transition: background 0.2s ease-in-out;
+      display: inline-block;
+      margin-top: 1rem;
+      text-decoration: none;
+    }
+    .feature-card .btn-primary:hover {
+      background-color: #d94800;
+    }
+
+    /* Expanded Mode Detail Sections */
+    .mode-details {
+      background-color: var(--color-bg-alt);
+      padding: 3rem 2rem;
+      margin-top: 1rem;
+    }
+    .mode-details + .mode-details {
+      margin-top: 2rem;
+    }
+    .mode-details h2 {
+      color: var(--color-primary);
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      font-size: 2rem;
+    }
+    .mode-details p {
+      color: var(--color-text);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+    .mode-details .btn-primary {
+      background-color: var(--color-secondary);
+      color: #fff;
+      padding: 0.6rem 1.2rem;
+      border-radius: 4px;
+      font-weight: 500;
+      transition: background 0.2s ease-in-out;
+      display: inline-block;
+    }
+    .mode-details .btn-primary:hover {
+      background-color: #d94800;
+    }
+
+    /* Spot the AI layout */
+    .spot-container {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .spot-container img {
+      max-width: 200px;
+      border-radius: 8px;
+    }
+    /* Responsive: stack on narrow screens */
+    @media (max-width: 768px) {
+      .spot-container {
+        flex-direction: column;
+        text-align: center;
+      }
+      .spot-container img {
+        margin-bottom: 1rem;
+      }
+    }
+
+    /* Utility Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="logo">YourDailyPuzzle.com</a>
+      <nav class="main-nav">
+        <a href="/trivai.html">TrivAI</a>
+        <a href="/escape-room">Escape Room</a>
+        <a href="/puzzle">Puzzle Mode</a>
+        <a href="/spot-ai">Spot the AI</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content container">
+      <h1>Sharpen Your Mind, One Puzzle at a Time</h1>
+      <p>Four game modes designed to challenge your logic, creativity, and detective skills—every single day.</p>
+      <div class="hero-buttons">
+        <a href="/trivai.html">TrivAI</a>
+        <a href="/escape-room">Escape Room</a>
+        <a href="/puzzle">Puzzle Mode</a>
+        <a href="/spot-ai">Spot the AI</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="container">
+      <!-- TrivAI Card -->
+      <div class="feature-card">
+        <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="none" stroke="var(--color-primary)" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z"/>
+          <path d="M9.09 9a3 3 0 0 1 5.82 0c0 2-3 2.25-3 4.5m-.8 4h.8"/>
+        </svg>
+        <h2>TrivAI (Trivia Mode)</h2>
+        <p>Put your general-knowledge skills to the test. Answer a new set of AI‐generated questions daily.</p>
+        <a class="btn-primary" href="/trivai.html">TrivAI</a>
+      </div>
+
+      <!-- Escape Room Card -->
+      <div class="feature-card">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="48" height="48" fill="none" stroke="var(--color-primary)" stroke-width="2" viewBox="0 0 24 24">
+          <rect x="3" y="11" width="18" height="11" rx="2" />
+          <path d="M7 11V7a5 5 0 0110 0v4" />
+        </svg>
+        <h2>Escape Room Game</h2>
+        <p>Navigate a virtual room, solve clues and riddles to “escape.” Each room is a new challenge.</p>
+        <a class="btn-primary" href="/escape-room">Escape Room</a>
+      </div>
+
+      <!-- Puzzle Mode Card -->
+      <div class="feature-card">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="48" height="48" fill="none" stroke="var(--color-primary)" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M4 4h6v6H4V4z" />
+          <path d="M14 4h6v6h-6V4z" />
+          <path d="M4 14h6v6H4v-6z" />
+          <path d="M14 14h6v6h-6v-6z" />
+        </svg>
+        <h2>Puzzle Mode</h2>
+        <p>Solve crosswords, word searches, logic puzzles, and more—at your own pace.</p>
+        <a class="btn-primary" href="/puzzle">Puzzle Mode</a>
+      </div>
+
+      <!-- Spot the AI Card -->
+      <div class="feature-card">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="48" height="48" fill="none" stroke="var(--color-primary)" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+          <circle cx="12" cy="12" r="3" />
+        </svg>
+        <h2>Spot the AI</h2>
+        <p>Can you tell which images are AI-generated? Test your observation skills daily.</p>
+        <a class="btn-primary" href="/spot-ai">Spot the AI</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Expanded TrivAI Details -->
+  <section class="mode-details">
+    <div class="container">
+      <h2>TrivAI (Trivia Mode) Details</h2>
+      <p>TrivAI challenges you with a fresh set of AI-generated trivia questions every day. Topics span general knowledge, history, science, pop culture, and more. Track your score, improve over time, and compete with friends on the daily leaderboard. Whether you have a minute or ten, TrivAI is perfect for a quick mental workout and discovering fun facts!</p>
+      <a class="btn-primary" href="/trivai.html">TrivAI</a>
+    </div>
+  </section>
+
+  <!-- Expanded Escape Room Details -->
+  <section class="mode-details">
+    <div class="container">
+      <h2>Escape Room Game Details</h2>
+      <p>In the Escape Room Game mode, players navigate a virtual room filled with puzzles, clues, and riddles. Your objective is to uncover hidden objects, solve logic challenges, and ultimately "escape" within a set time limit. Each room presents unique themes and difficulty levels—ranging from ancient temples to futuristic labs. Collaboration options allow multiple players to work together or compete for the fastest escape time!</p>
+      <a class="btn-primary" href="/escape-room">Escape Room</a>
+    </div>
+  </section>
+
+  <!-- Expanded Puzzle Mode Details -->
+  <section class="mode-details">
+    <div class="container">
+      <h2>Puzzle Mode Details</h2>
+      <p>Puzzle Mode offers a variety of classic and new puzzles for solo enjoyment. Choose from crosswords, word searches, Sudoku, and logic challenges that adapt to your skill level. Track your progress over time and unlock harder puzzles as you improve. Ideal for anyone who loves a mental workout and wants to sharpen their problem-solving skills!</p>
+      <a class="btn-primary" href="/puzzle">Start Puzzle Mode</a>
+    </div>
+  </section>
+
+  <!-- Expanded Spot the AI Details with Image -->
+  <section class="mode-details">
+    <div class="container">
+      <h2>Spot the AI Details</h2>
+      <div class="spot-container">
+        <img src="/assets/images/AIImage01.png" alt="Example AI-generated image" />
+        <div class="spot-text">
+          <p>In Spot the AI, you'll be shown image pairs—one real photo and one AI-generated—and you decide which is which. Each round increases in difficulty as AI models become more convincing. Hone your visual detection skills, learn about the subtle differences between authentic and synthetic images, and compete on leaderboards to see who can spot the AI most accurately!</p>
+          <a class="btn-primary" href="/spot-ai">Play Spot the AI</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
