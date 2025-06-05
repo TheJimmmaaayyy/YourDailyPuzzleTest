@@ -1,120 +1,293 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="styles.css">
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TrivAI – YourDailyPuzzle</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="trivai.css" />
+  <style>
+    /* CSS Variables for Color Palette */
+    :root {
+      --color-bg: #F2F2F2;            /* light gray page background */
+      --color-bg-alt: #FFFFFF;        /* white for cards or alternate sections */
+      --color-primary: #1E90FF;       /* DodgerBlue accent */
+      --color-secondary: #00BFFF;     /* DeepSkyBlue accent */
+      --color-text: #222222;          /* dark gray for body text */
+      --color-heading: #111111;       /* near black for headings */
+      --color-link: var(--color-primary);
+      --btn-hover: #187bcd;           /* darker blue for button hover */
+      --hero-gradient-start: #2196F3; /* lighter blue */
+      --hero-gradient-end: #0D47A1;   /* dark blue */
+    }
+
+    /* Global Styles */
+    body {
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    a {
+      color: var(--color-link);
+      text-decoration: none;
+      transition: color 0.2s ease-in-out;
+    }
+    a:hover {
+      color: var(--btn-hover);
+      text-decoration: underline;
+    }
+
+    /* Header */
+    .site-header {
+      background-color: var(--color-bg-alt);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+    .site-header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+    .site-header .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-primary);
+    }
+    .site-header .main-nav a {
+      margin-left: 1.5rem;
+      font-weight: 500;
+      color: var(--color-text);
+    }
+    .site-header .main-nav a:hover {
+      color: var(--color-primary);
+    }
+    .site-header .main-nav .active {
+      color: var(--color-primary);
+      font-weight: 600;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, var(--hero-gradient-start) 0%, var(--hero-gradient-end) 100%);
+      color: #fff;
+      text-align: center;
+      padding: 6rem 1rem;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    /* Quiz Sections */
+    .quiz-sections {
+      background-color: var(--color-bg-alt);
+      padding: 4rem 2rem;
+    }
+    .quiz-sections .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+    .quiz-card {
+      background-color: var(--color-bg-alt);
+      border-radius: 8px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .quiz-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border: 2px solid var(--color-primary);
+    }
+    .quiz-card .icon {
+      margin-bottom: 1rem;
+    }
+    .quiz-card h2 {
+      color: var(--color-primary);
+      margin-bottom: 0.75rem;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+    }
+    .quiz-card p {
+      color: var(--color-text);
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }
+    .quiz-button {
+      background-color: var(--color-secondary);
+      color: #fff;
+      padding: 0.6rem 1.2rem;
+      border-radius: 4px;
+      font-weight: 500;
+      transition: background 0.2s ease-in-out;
+      display: inline-block;
+      margin-top: 1rem;
+      text-decoration: none;
+    }
+    .quiz-button:hover {
+      background-color: #0091ea;
+    }
+
+    /* Merged Custom Quiz Form within card */
+    .custom-input {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    .custom-input input[type="text"] {
+      padding: 0.5rem 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+      flex: 1 1 160px;
+    }
+    .custom-input button {
+      background-color: var(--color-primary);
+      color: #fff;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 4px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease-in-out;
+    }
+    .custom-input button:hover {
+      background-color: var(--btn-hover);
+    }
+
+    /* Utility Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    /* Quiz Results */
+    .quiz-results {
+      background-color: var(--color-bg-alt);
+      padding: 4rem 2rem;
+      margin-top: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      display: none;
+    }
+    .quiz-results h2 {
+      color: var(--color-primary);
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      font-size: 2rem;
+      text-align: center;
+    }
+    .quiz-results ol {
+      list-style: decimal inside;
+      padding-left: 0;
+      margin: 0 auto;
+      max-width: 800px;
+      line-height: 1.6;
+    }
+    .quiz-results ol li {
+      margin-bottom: 1.5rem;
+    }
+    .quiz-results ol li p {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .quiz-results button {
+      display: block;
+      margin: 2rem auto 0;
+      background-color: var(--color-primary);
+      color: #fff;
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 4px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s ease-in-out;
+    }
+    .quiz-results button:hover {
+      background-color: var(--btn-hover);
+    }
+  </style>
 </head>
-
-<body class="bg-light-gray text-dark-font">
-
-  <!-- ====== Header / Navigation ====== -->
-  <header class="navbar">
-    <div class="container flex items-center justify-between py-4">
-      <a href="index.html" class="logo flex items-center">
-        <img src="logo.svg" alt="YourDailyPuzzle Logo" class="h-8 w-auto" />
-        <span class="ml-2 font-semibold text-xl">YourDailyPuzzle</span>
-      </a>
-      <nav class="nav-links space-x-6">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="trivai.html" class="nav-link active">TrivAI</a>
-        <a href="escape.html" class="nav-link">Escape Room</a>
-        <a href="puzzles.html" class="nav-link">Puzzles</a>
-        <a href="spot-ai.html" class="nav-link">Spot the AI</a>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="/index.html" class="logo">YourDailyPuzzle.com</a>
+      <nav class="main-nav">
+        <a href="/index.html">Home</a>
+        <a href="/trivai.html" class="active">TrivAI</a>
+        <a href="/escape-room">Escape Room</a>
+        <a href="/puzzle">Puzzle Mode</a>
+        <a href="/spot-ai">Spot the AI</a>
       </nav>
     </div>
   </header>
 
-  <!-- ====== Hero Banner ====== -->
-  <section class="trivia-hero">
-    <div class="container text-center">
-      <h1 class="trivia-hero-title">TrivAI</h1>
-      <p class="trivia-hero-subtitle">
-        Challenge your mind with fresh questions every day—or create your own category quiz on the spot.
-      </p>
+  <section class="hero">
+    <div class="hero-content container">
+      <h1>TrivAI – Challenge Your Knowledge</h1>
+      <p>Daily trivia and custom quiz categories in one place. Test yourself and learn something new every day!</p>
     </div>
   </section>
 
-  <!-- ====== Main Content ====== -->
-  <main class="container py-12">
-    <!-- ====== Daily Multiple Choice Quiz Section ====== -->
-    <section class="trivia-card mb-12">
-      <div class="trivia-section-header flex items-center mb-4">
-        <img src="icon-daily.svg" alt="Daily Quiz Icon" class="h-6 w-6 mr-2" />
-        <h2 class="text-2xl font-semibold">Daily Quiz</h2>
+  <section class="quiz-sections">
+    <div class="container">
+      <!-- Daily Quiz Card -->
+      <div class="quiz-card">
+        <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="none" stroke="var(--color-primary)" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z"/>
+          <path d="M9.09 9a3 3 0 0 1 5.82 0c0 2-3 2.25-3 4.5m-.8 4h.8"/>
+        </svg>
+        <h2>Daily Multiple-Choice Quiz</h2>
+        <p>A new set of 10 trivia questions is released every day at midnight. Topics range from science, history, pop culture, and more. Track your streak and climb the leaderboard!</p>
+        <a class="quiz-button" href="#">Start Today's Quiz</a>
       </div>
-      <p class="trivia-text mb-6">
-        Every day at midnight (ET), a fresh set of 10 multiple-choice questions goes live.<br>
-        Think of it like bar trivia—covering sports, pop culture, world geography, history, and more.<br>
-        Rack up points, track your streak, and climb the leaderboard!
-      </p>
-      <button class="trivia-btn-primary">
-        Start Today’s Quiz
-      </button>
-    </section>
 
-    <!-- ====== Custom Category Quiz Section ====== -->
-    <section class="trivia-card">
-      <div class="trivia-section-header flex items-center mb-4">
-        <img src="icon-custom.svg" alt="Custom Quiz Icon" class="h-6 w-6 mr-2" />
-        <h2 class="text-2xl font-semibold">Custom Category Quiz</h2>
+      <!-- Custom Category Quiz Card with integrated input -->
+      <div class="quiz-card">
+        <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="none" stroke="var(--color-primary)" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M2 12h20M12 2v20"/>
+        </svg>
+        <h2>Custom Category Quiz (Pro)</h2>
+        <p>Type any category below—“World Geography,” “1990s Hip-Hop,” “Oscar-Winning Movies”—and get an instant 10-question quiz.</p>
+        <div class="custom-input">
+          <input type="text" id="quiz-category" placeholder="e.g. World Geography" />
+          <button id="generate-quiz-btn">Generate Quiz</button>
+        </div>
       </div>
-      <p class="trivia-text mb-6">
-        Can’t wait for tomorrow’s questions? Type in any category—“World Geography,” “1990s Hip-Hop,”<br>
-        “Oscar-Winning Movies,” or whatever you like. We’ll generate 10 brand-new questions on the spot.
-      </p>
-      <form id="custom-quiz-form" class="flex flex-col sm:flex-row items-start sm:items-center">
-        <input
-          type="text"
-          id="quiz-category"
-          name="category"
-          placeholder="e.g. World Geography"
-          class="trivia-input flex-1 mb-4 sm:mb-0 sm:mr-4"
-          required
-        />
-        <button type="submit" class="trivia-btn-primary">
-          Generate Quiz
-        </button>
-      </form>
-
-      <!-- Placeholder for showing the generated questions -->
-      <div id="quiz-container" class="mt-8 hidden">
-        <h3 class="text-xl font-semibold mb-4">
-          Your Quiz: <span id="display-category" class="text-accent"></span>
-        </h3>
-        <ol id="questions-list" class="list-decimal pl-6 space-y-6 trivia-questions-list"></ol>
-        <button id="take-another" class="mt-6 trivia-btn-secondary">
-          Try a Different Category
-        </button>
-      </div>
-    </section>
-  </main>
-
-  <!-- ====== Footer ====== -->
-  <footer class="footer py-8">
-    <div class="container text-center text-sm text-gray-600">
-      © 2025 YourDailyPuzzle. All rights reserved.
     </div>
-  </footer>
+  </section>
 
-  <!-- ====== Scripts ====== -->
+  <section class="quiz-results" id="quiz-results">
+    <h2>Quiz: <span id="display-category"></span></h2>
+    <ol id="questions-list"></ol>
+    <button id="try-again">Try Another Category</button>
+  </section>
+
   <script>
-    const form = document.getElementById('custom-quiz-form');
-    const quizContainer = document.getElementById('quiz-container');
+    const generateBtn = document.getElementById('generate-quiz-btn');
+    const quizResults = document.getElementById('quiz-results');
     const questionsList = document.getElementById('questions-list');
     const displayCategory = document.getElementById('display-category');
-    const takeAnotherBtn = document.getElementById('take-another');
+    const tryAgainBtn = document.getElementById('try-again');
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const category = document.getElementById('quiz-category').value.trim();
+    generateBtn.addEventListener('click', async () => {
+      const categoryInput = document.getElementById('quiz-category');
+      const category = categoryInput.value.trim();
       if (!category) return;
 
-      form.querySelector('button').innerText = 'Generating...';
-      form.querySelector('button').disabled = true;
+      generateBtn.innerText = 'Generating...';
+      generateBtn.disabled = true;
 
       try {
         const res = await fetch('/api/generate-quiz', {
@@ -123,7 +296,14 @@
           body: JSON.stringify({ category })
         });
 
-        if (!res.ok) throw new Error('Network response was not OK');
+        if (!res.ok) {
+          let errMsg = 'Error generating quiz.';
+          try {
+            const errJson = await res.json();
+            errMsg = errJson.error || errMsg;
+          } catch {}
+          throw new Error(errMsg);
+        }
 
         const data = await res.json();
         displayCategory.innerText = data.category;
@@ -131,37 +311,37 @@
 
         data.questions.forEach((qObj) => {
           const li = document.createElement('li');
-          li.className = 'mb-4';
+          const questionText = document.createElement('p');
+          questionText.innerText = qObj.question;
+          li.appendChild(questionText);
 
-          if (qObj.choices && qObj.choices.length) {
-            const questionHTML = `
-              <p class="font-medium">${qObj.question}</p>
-              <ul class="ml-4 list-disc space-y-1 mt-2">
-                ${qObj.choices.map(ch => `<li>${ch}</li>`).join('')}
-              </ul>
-            `;
-            li.innerHTML = questionHTML;
-          } else {
-            li.innerHTML = `<p>${qObj.question}</p>`;
-          }
-
+          const ul = document.createElement('ul');
+          ul.style.listStyleType = 'disc';
+          ul.style.paddingLeft = '1.5rem';
+          qObj.choices.forEach(choice => {
+            const choiceLi = document.createElement('li');
+            choiceLi.innerText = choice;
+            ul.appendChild(choiceLi);
+          });
+          li.appendChild(ul);
           questionsList.appendChild(li);
         });
 
-        form.classList.add('hidden');
-        quizContainer.classList.remove('hidden');
+        // Hide quiz sections and show results
+        document.querySelector('.quiz-sections').style.display = 'none';
+        quizResults.style.display = 'block';
       } catch (err) {
         console.error(err);
-        alert('Sorry, something went wrong generating the quiz.');
+        alert(err.message);
       } finally {
-        form.querySelector('button').innerText = 'Generate Quiz';
-        form.querySelector('button').disabled = false;
+        generateBtn.innerText = 'Generate Quiz';
+        generateBtn.disabled = false;
       }
     });
 
-    takeAnotherBtn.addEventListener('click', () => {
-      quizContainer.classList.add('hidden');
-      form.classList.remove('hidden');
+    tryAgainBtn.addEventListener('click', () => {
+      quizResults.style.display = 'none';
+      document.querySelector('.quiz-sections').style.display = 'block';
       document.getElementById('quiz-category').value = '';
     });
   </script>
