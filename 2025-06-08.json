@@ -1,7 +1,7 @@
 {
   "date": "2025-06-08",
   "baselineWidth": 800,
-  "backgroundImage": "/assets/rooms/pirate_cabin_bg.jpg",
+  "backgroundImage": "/assets/rooms/pirate_cabin_bg.png",
   "hotspots": [
     {
       "id": "pirate_hat",
