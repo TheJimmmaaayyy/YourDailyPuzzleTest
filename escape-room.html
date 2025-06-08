@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Escape Room | YourDailyPuzzle</title>
   <style>
-    /* CSS Variables (match index + red gradient) */
     :root {
       --color-bg: #F2F2F2;
       --color-bg-alt: #FFFFFF;
@@ -13,11 +12,9 @@
       --color-text: #222222;
       --color-link: var(--color-primary);
       --btn-hover: #008CBF;
-      --countdown-gradient-start: #FFCDD2;
-      --countdown-gradient-end: #EF9A9A;
+      --intro-gradient-start: #FFCDD2;
+      --intro-gradient-end: #EF9A9A;
     }
-
-    /* Global */
     body {
       background: var(--color-bg);
       color: var(--color-text);
@@ -26,37 +23,85 @@
     }
     a { color: var(--color-link); text-decoration: none; transition: color .2s; }
     a:hover { color: var(--btn-hover); text-decoration: underline; }
-
-    /* Header */
-    .site-header { background: var(--color-bg-alt); box-shadow: 0 2px 4px rgba(0,0,0,0.05); width: 100%; }
-    .site-header .container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem; }
-    .site-header .logo { font-size: 1.5rem; font-weight: 700; color: var(--color-primary); }
-    .site-header .main-nav a { margin-left: 1.5rem; font-weight: 500; color: var(--color-text); }
-    .site-header .main-nav a:hover { color: var(--color-primary); }
-    .site-header .main-nav .active { color: var(--color-primary); font-weight: 600; }
-
-    /* Intro Banner */
-    .intro-banner { background: var(--color-bg-alt); padding: 2rem 1rem; }
-    .intro-banner .container { max-width: 800px; margin: 0 auto; text-align: center; }
-    .intro-banner h1 { margin-bottom: 0.5rem; font-size: 2rem; color: var(--color-heading); }
-    .intro-banner p { margin: 0; font-size: 1rem; color: var(--color-text); }
-
-    /* Countdown Banner */
-    .countdown-banner { background: linear-gradient(135deg, var(--countdown-gradient-start) 0%, var(--countdown-gradient-end) 100%); color: #222; text-align: center; padding: 1rem; }
-    .countdown-banner h2 { margin: 0; font-size: 1.25rem; font-weight: 500; }
-    .countdown-banner .timer { margin-top: 0.5rem; font-size: 2rem; font-family: 'Poppins', sans-serif; font-weight: 600; }
-
-    /* Room & Inventory */
-    .room-container { position: relative; width: 800px; max-width: 100%; margin: 2rem auto; background: #000; overflow: hidden; }
+    .site-header {
+      background: var(--color-bg-alt);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      width: 100%;
+    }
+    .site-header .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+    }
+    .site-header .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-primary);
+    }
+    .site-header .main-nav a {
+      margin-left: 1.5rem;
+      font-weight: 500;
+      color: var(--color-text);
+    }
+    .site-header .main-nav a:hover,
+    .site-header .main-nav .active {
+      color: var(--color-primary);
+      font-weight: 600;
+    }
+    .intro-banner {
+      background: linear-gradient(135deg, var(--intro-gradient-start) 0%, var(--intro-gradient-end) 100%);
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+    .intro-banner .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .intro-banner h1 {
+      margin-bottom: 0.5rem;
+      font-size: 2rem;
+      color: var(--color-text);
+    }
+    .intro-banner p {
+      margin: 0;
+      font-size: 1rem;
+      color: var(--color-text);
+    }
+    .room-container {
+      position: relative;
+      width: 800px;
+      max-width: 100%;
+      margin: 2rem auto;
+      background: #000;
+      overflow: hidden;
+    }
     .room-container img { width: 100%; display: block; }
     .hotspot { position: absolute; cursor: pointer; }
     .hotspot.hidden, .hotspot.inactive, .hotspot.locked { display: none; }
-    .inventory { width: 800px; max-width: 100%; margin: 0 auto 2rem; background: var(--color-bg-alt); border-top: 1px solid #ccc; display: flex; align-items: center; min-height: 80px; padding: 0.5rem; box-shadow: 0 -2px 4px rgba(0,0,0,0.05); }
+    .inventory {
+      width: 800px;
+      max-width: 100%;
+      margin: 0 auto;
+      background: var(--color-bg-alt);
+      border-top: 1px solid #ccc;
+      display: flex;
+      align-items: center;
+      min-height: 80px;
+      padding: 0.5rem;
+      box-shadow: 0 -2px 4px rgba(0,0,0,0.05);
+    }
     .inventory .slot { width: 60px; height: 60px; margin-right: 10px; background: #fafafa; border: 1px solid #ddd; display: flex; justify-content: center; align-items: center; }
     .inventory .slot img { max-width: 100%; max-height: 100%; }
     .message { position: fixed; bottom: 20px; right: 20px; background: rgba(0,0,0,0.8); color: #fff; padding: 0.5rem 1rem; border-radius: 4px; display: none; }
-
-    /* Footer */
+    .countdown-banner {
+      text-align: center;
+      margin: 1rem auto;
+    }
+    .countdown-banner h2 { margin: 0; font-size: 1.25rem; font-weight: 500; }
+    .countdown-banner .timer { margin-top: 0.5rem; font-size: 2rem; font-family: 'Poppins', sans-serif; font-weight: 600; }
     footer { background: var(--color-bg-alt); text-align: center; padding: 1rem; box-shadow: 0 -2px 4px rgba(0,0,0,0.05); }
   </style>
 </head>
@@ -70,7 +115,7 @@
         <a href="escape-room.html" class="active">Escape Room</a>
         <a href="puzzle.html">Puzzle Mode</a>
         <a href="spot-ai.html">Spot the AI</a>
-      <//nav>
+      </nav>
     </div>
   </header>
 
@@ -81,17 +126,16 @@
     </div>
   </section>
 
+  <div class="room-container" id="room-container">
+    <img id="room-bg" src="" alt="Escape Room">
+  </div>
+  <div class="inventory" id="inventory-bar"></div>
+  <div class="message" id="message-box"></div>
+
   <section class="countdown-banner">
     <h2>Next room unlocks at <span id="unlock-time">12:00 AM ET</span></h2>
     <div class="timer" id="timer">--:--:--</div>
   </section>
-
-  <div class="room-container" id="room-container">
-    <img id="room-bg" src="" alt="Escape Room">
-  </div>
-
-  <div class="inventory" id="inventory-bar"></div>
-  <div class="message" id="message-box"></div>
 
   <footer>
     &copy; 2025 YourDailyPuzzle
@@ -101,7 +145,6 @@
     const gameState = { hotspots: {}, inventory: [] };
     let puzzleData = null;
 
-    // Countdown to midnight ET
     function startCountdown() {
       const timerEl = document.getElementById('timer');
       function update() {
@@ -120,7 +163,6 @@
       setInterval(update, 1000);
     }
 
-    // Load puzzle JSON
     function loadPuzzle() {
       const now = new Date();
       const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
@@ -135,7 +177,6 @@
         .then(data => {
           puzzleData = data;
           document.getElementById('room-bg').src = data.backgroundImage;
-          // further init...
         })
         .catch(err => {
           console.error('Failed to load puzzle:', err);
