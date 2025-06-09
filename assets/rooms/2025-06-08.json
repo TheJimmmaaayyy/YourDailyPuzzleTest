@@ -5,53 +5,30 @@
   "hotspots": [
     {
       "id": "pirate_hat",
-      "shape": {
-        "type": "rect",
-        "x": 50,
-        "y": 400,
-        "width": 100,
-        "height": 100
-      },
+      "shape": { "type": "rect", "x": 50, "y": 400, "width": 100, "height": 100 },
       "initialState": "available",
       "onClick": {
         "type": "pickup",
-        "message": "You grabbed the pirate hat and put it on. You feel more\u2026 adventurous.",
-        "grants": [
-          "pirate_hat"
-        ]
+        "message": "You grabbed the pirate hat and put it on. You feel more… adventurous.",
+        "grants": ["pirate_hat"]
       }
     },
     {
       "id": "ship_wheel",
-      "shape": {
-        "type": "circle",
-        "x": 300,
-        "y": 200,
-        "radius": 100
-      },
+      "shape": { "type": "circle", "x": 300, "y": 200, "radius": 100 },
       "initialState": "inactive",
-      "requires": [
-        "pirate_hat"
-      ],
+      "requires": ["pirate_hat"],
       "onClick": {
         "type": "spin",
-        "message": "You spin the wheel\u2014suddenly the compass glows!",
+        "message": "You spin the wheel—suddenly the compass glows!",
         "grants": []
       }
     },
     {
       "id": "spyglass_stand",
-      "shape": {
-        "type": "rect",
-        "x": 550,
-        "y": 250,
-        "width": 100,
-        "height": 100
-      },
+      "shape": { "type": "rect", "x": 550, "y": 250, "width": 100, "height": 100 },
       "initialState": "inactive",
-      "requiresState": {
-        "ship_wheel": "spun"
-      },
+      "requiresState": { "ship_wheel": "spin" },
       "onClick": {
         "type": "inspect",
         "message": "Through the spyglass, you spot a glint under the floorboard.",
@@ -60,53 +37,29 @@
     },
     {
       "id": "floorboard",
-      "shape": {
-        "type": "rect",
-        "x": 580,
-        "y": 500,
-        "width": 150,
-        "height": 50
-      },
+      "shape": { "type": "rect", "x": 580, "y": 500, "width": 150, "height": 50 },
       "initialState": "hidden",
       "revealedBy": "spyglass_stand",
       "onClick": {
         "type": "pickup",
         "message": "You lifted the loose floorboard and discovered a brass key!",
-        "grants": [
-          "brig_key"
-        ]
+        "grants": ["brig_key"]
       }
     },
     {
       "id": "brig_door",
-      "shape": {
-        "type": "rect",
-        "x": 100,
-        "y": 150,
-        "width": 150,
-        "height": 300
-      },
+      "shape": { "type": "rect", "x": 100, "y": 150, "width": 150, "height": 300 },
       "initialState": "locked",
-      "requires": [
-        "brig_key"
-      ],
+      "requires": ["brig_key"],
       "onClick": {
         "type": "exit",
-        "message": "You turned the brass key\u2014click! The brig door swings open. Freedom!",
+        "message": "You turned the brass key—click! The brig door swings open. Freedom!",
         "grants": []
       }
     }
   ],
   "items": [
-    {
-      "id": "pirate_hat",
-      "name": "Pirate Hat",
-      "icon": "assets/items/pirate_hat.png"
-    },
-    {
-      "id": "brig_key",
-      "name": "Brass Key",
-      "icon": "assets/items/brig_key.png"
-    }
+    { "id": "pirate_hat", "name": "Pirate Hat", "icon": "assets/items/pirate_hat.png" },
+    { "id": "brig_key",  "name": "Brass Key",   "icon": "assets/items/brig_key.png"  }
   ]
 }
