@@ -5,42 +5,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TrivAI – YourDailyPuzzle</title>
   <style>
-    /* CSS Variables for Color Palette */
     :root {
-      --color-bg: #F2F2F2;            /* light gray page background */
-      --color-bg-alt: #FFFFFF;        /* white for cards or alternate sections */
-      --color-primary: #1E90FF;       /* DodgerBlue accent */
-      --color-secondary: #00BFFF;     /* DeepSkyBlue accent */
-      --color-text: #222222;          /* dark gray for body text */
-      --color-heading: #111111;       /* near black for headings */
+      --color-bg: #F2F2F2;
+      --color-bg-alt: #FFFFFF;
+      --color-primary: #1E90FF;
+      --color-secondary: #00BFFF;
+      --color-text: #222222;
       --color-link: var(--color-primary);
-      --btn-hover: #187bcd;           /* darker blue for button hover */
-      --hero-gradient-start: #2196F3; /* lighter blue */
-      --hero-gradient-end: #0D47A1;   /* dark blue */
+      --btn-hover: #187bcd;
+      --hero-gradient-start: #2196F3;
+      --hero-gradient-end: #0D47A1;
     }
-
-    /* Global Styles */
     body {
-      background-color: var(--color-bg);
+      background: var(--color-bg);
       color: var(--color-text);
       margin: 0;
       font-family: 'Roboto', sans-serif;
     }
-
     a {
       color: var(--color-link);
       text-decoration: none;
-      transition: color 0.2s ease-in-out;
+      transition: color .2s;
     }
     a:hover {
       color: var(--btn-hover);
-      text-decoration: underline;
     }
-
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
     /* Header */
     .site-header {
-      background-color: var(--color-bg-alt);
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      background: var(--color-bg-alt);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     }
     .site-header .container {
       display: flex;
@@ -48,25 +46,20 @@
       align-items: center;
       padding: 1rem 2rem;
     }
-    .site-header .logo {
+    .logo {
       font-size: 1.5rem;
       font-weight: 700;
       color: var(--color-primary);
     }
-    .site-header .main-nav a {
+    .main-nav a {
       margin-left: 1.5rem;
       font-weight: 500;
-      color: var(--color-text);
     }
-    .site-header .main-nav a:hover {
-      color: var(--color-primary);
-    }
-    .site-header .main-nav .active {
+    .main-nav .active {
       color: var(--color-primary);
       font-weight: 600;
     }
-
-    /* Hero Section */
+    /* Hero */
     .hero {
       background: linear-gradient(135deg, var(--hero-gradient-start) 0%, var(--hero-gradient-end) 100%);
       color: #fff;
@@ -74,37 +67,35 @@
       padding: 6rem 1rem;
     }
     .hero h1 {
+      font-family: 'Poppins', sans-serif;
       font-size: 2.5rem;
       margin-bottom: 1rem;
-      font-family: 'Poppins', sans-serif;
-      font-weight: 600;
     }
     .hero p {
       font-size: 1.2rem;
       margin-bottom: 2rem;
     }
-
     /* Quiz Sections */
     .quiz-sections {
-      background-color: var(--color-bg-alt);
+      background: var(--color-bg-alt);
       padding: 4rem 2rem;
     }
     .quiz-sections .container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
       gap: 2rem;
     }
     .quiz-card {
-      background-color: var(--color-bg-alt);
+      background: var(--color-bg-alt);
       border-radius: 8px;
       padding: 2rem;
       text-align: center;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      transition: transform .2s, box-shadow .2s;
     }
     .quiz-card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       border: 2px solid var(--color-primary);
     }
     .quiz-card .icon {
@@ -112,110 +103,110 @@
     }
     .quiz-card h2 {
       color: var(--color-primary);
-      margin-bottom: 0.75rem;
       font-family: 'Poppins', sans-serif;
       font-weight: 600;
+      margin-bottom: .75rem;
     }
     .quiz-card p {
-      color: var(--color-text);
-      margin-bottom: 1rem;
       line-height: 1.4;
+      margin-bottom: 1rem;
     }
     .quiz-button {
-      background-color: var(--color-secondary);
+      background: var(--color-secondary);
       color: #fff;
-      padding: 0.6rem 1.2rem;
+      padding: .6rem 1.2rem;
       border-radius: 4px;
       font-weight: 500;
-      transition: background 0.2s ease-in-out;
-      display: inline-block;
+      transition: background .2s;
       margin-top: 1rem;
-      text-decoration: none;
+      display: inline-block;
+      cursor: pointer;
     }
     .quiz-button:hover {
-      background-color: #0091ea;
+      background: #0091ea;
     }
-
-    /* Merged Custom Quiz Form within card */
+    /* Custom Input */
     .custom-input {
-      margin-top: 1rem;
       display: flex;
       justify-content: center;
-      gap: 0.5rem;
+      gap: .5rem;
+      margin-top: 1rem;
     }
-    .custom-input input[type="text"] {
-      padding: 0.5rem 1rem;
+    .custom-input input {
+      flex: 1;
+      padding: .5rem 1rem;
       border: 1px solid #ccc;
       border-radius: 4px;
-      font-size: 1rem;
-      flex: 1 1 160px;
     }
     .custom-input button {
-      background-color: var(--color-primary);
+      background: var(--color-primary);
       color: #fff;
-      padding: 0.5rem 1rem;
+      padding: .5rem 1rem;
       border: none;
       border-radius: 4px;
       font-weight: 600;
       cursor: pointer;
-      transition: background 0.2s ease-in-out;
+      transition: background .2s;
     }
     .custom-input button:hover {
-      background-color: var(--btn-hover);
+      background: var(--btn-hover);
     }
-
-    /* Utility Container */
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 1rem;
-    }
-
-    /* Quiz Results */
-    .quiz-results {
-      background-color: var(--color-bg-alt);
-      padding: 4rem 2rem;
-      margin-top: 2rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    /* Quiz Container */
+    #quiz-container {
       display: none;
+      background: var(--color-bg-alt);
+      padding: 4rem 2rem;
+      margin: 2rem auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     }
-    .quiz-results h2 {
+    #quiz-title {
+      text-align: center;
       color: var(--color-primary);
       font-family: 'Poppins', sans-serif;
       font-weight: 600;
-      margin-bottom: 1rem;
       font-size: 2rem;
-      text-align: center;
+      margin-bottom: 1rem;
     }
-    .quiz-results ol {
+    #quiz-form ol {
       list-style: decimal inside;
-      padding-left: 0;
-      margin: 0 auto;
-      max-width: 800px;
-      line-height: 1.6;
+      padding: 0;
     }
-    .quiz-results ol li {
+    #quiz-form li {
       margin-bottom: 1.5rem;
     }
-    .quiz-results ol li p {
+    #quiz-form p {
       font-weight: 600;
-      margin-bottom: 0.5rem;
+      margin-bottom: .5rem;
     }
-    .quiz-results button {
-      display: block;
-      margin: 2rem auto 0;
-      background-color: var(--color-primary);
+    #quiz-form ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    #quiz-form label {
+      display: flex;
+      align-items: center;
+      margin-bottom: .5rem;
+      cursor: pointer;
+    }
+    #quiz-form input[type="radio"] {
+      margin-right: .5rem;
+    }
+    #submit-quiz, #try-again {
+      background: var(--color-primary);
       color: #fff;
-      padding: 0.6rem 1.2rem;
+      padding: .6rem 1.2rem;
       border: none;
       border-radius: 4px;
       font-weight: 500;
       cursor: pointer;
-      transition: background 0.2s ease-in-out;
+      transition: background .2s;
+      display: block;
+      margin: 2rem auto 0;
     }
-    .quiz-results button:hover {
-      background-color: var(--btn-hover);
+    #submit-quiz:hover, #try-again:hover {
+      background: var(--btn-hover);
     }
   </style>
 </head>
@@ -226,15 +217,15 @@
       <nav class="main-nav">
         <a href="index.html">Home</a>
         <a href="trivai.html" class="active">TrivAI</a>
-        <a href="escape-room">Escape Room</a>
-        <a href="puzzle">Puzzle Mode</a>
-        <a href="spot-ai">Spot the AI</a>
+        <a href="escape-room.html">Escape Room</a>
+        <a href="puzzles.html">Puzzle Mode</a>
+        <a href="spot-ai.html">Spot the AI</a>
       </nav>
     </div>
   </header>
 
   <section class="hero">
-    <div class="hero-content container">
+    <div class="container">
       <h1>TrivAI – Challenge Your Knowledge</h1>
       <p>Daily trivia and custom quiz categories in one place. Test yourself and learn something new every day!</p>
     </div>
@@ -242,24 +233,16 @@
 
   <section class="quiz-sections">
     <div class="container">
-      <!-- Daily Quiz Card -->
       <div class="quiz-card">
-        <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="none" stroke="var(--color-primary)" stroke-width="2" viewBox="0 0 24 24">
-          <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z"/>
-          <path d="M9.09 9a3 3 0 0 1 5.82 0c0 2-3 2.25-3 4.5m-.8 4h.8"/>
-        </svg>
+        <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="none" stroke="var(--color-primary)" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2c-5.523 0-10 4.477-10 10s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2"/><path d="M9.09 9a3 3 0 0 1 5.82 0c0 2-3 2.25-3 4.5m-.8 4h.8"/></svg>
         <h2>Daily Multiple-Choice Quiz</h2>
-        <p>A new set of 10 trivia questions is released every day at midnight. Topics range from science, history, pop culture, and more. Track your streak and climb the leaderboard!</p>
-        <a class="quiz-button" href="#">Start Today's Quiz</a>
+        <p>A fresh set of 10 questions is released every day at midnight.</p>
+        <button id="start-daily-quiz" class="quiz-button">Start Today's Quiz</button>
       </div>
-
-      <!-- Custom Category Quiz Card with integrated input -->
       <div class="quiz-card">
-        <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="none" stroke="var(--color-primary)" stroke-width="2" viewBox="0 0 24 24">
-          <path d="M2 12h20M12 2v20"/>
-        </svg>
+        <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="none" stroke="var(--color-primary)" stroke-width="2" viewBox="0 0 24 24"><path d="M2 12h20M12 2v20"/></svg>
         <h2>Custom Category Quiz (Pro)</h2>
-        <p>Type any category below—“World Geography,” “1990s Hip-Hop,” “Oscar-Winning Movies”—and get an instant 10-question quiz.</p>
+        <p>Type any category below to get an instant 10-question quiz.</p>
         <div class="custom-input">
           <input type="text" id="quiz-category" placeholder="e.g. World Geography" />
           <button id="generate-quiz-btn">Generate Quiz</button>
@@ -268,81 +251,114 @@
     </div>
   </section>
 
-  <section class="quiz-results" id="quiz-results">
-    <h2>Quiz: <span id="display-category"></span></h2>
-    <ol id="questions-list"></ol>
-    <button id="try-again">Try Another Category</button>
+  <section id="quiz-container">
+    <div id="quiz-title"></div>
+    <form id="quiz-form"></form>
   </section>
 
   <script>
-    const generateBtn = document.getElementById('generate-quiz-btn');
-    const quizResults = document.getElementById('quiz-results');
-    const questionsList = document.getElementById('questions-list');
-    const displayCategory = document.getElementById('display-category');
-    const tryAgainBtn = document.getElementById('try-again');
+    let lastQuizData = null;
 
-    generateBtn.addEventListener('click', async () => {
-      const categoryInput = document.getElementById('quiz-category');
-      const category = categoryInput.value.trim();
+    function renderQuiz(data) {
+      lastQuizData = data;
+      document.querySelector('.quiz-sections').style.display = 'none';
+      const container = document.getElementById('quiz-container');
+      document.getElementById('quiz-title').innerText = data.category;
+      const form = document.getElementById('quiz-form');
+      form.innerHTML = '';
+      const ol = document.createElement('ol');
+      data.questions.forEach((q, i) => {
+        const li = document.createElement('li');
+        const p = document.createElement('p');
+        p.innerText = (i + 1) + '. ' + q.question;
+        li.appendChild(p);
+        const ul = document.createElement('ul');
+        q.choices.forEach(choice => {
+          const label = document.createElement('label');
+          const radio = document.createElement('input');
+          radio.type = 'radio'; radio.name = 'q' + i; radio.value = choice;
+          label.appendChild(radio);
+          label.appendChild(document.createTextNode(choice));
+          ul.appendChild(label);
+        });
+        li.appendChild(ul);
+        ol.appendChild(li);
+      });
+      form.appendChild(ol);
+      const submitBtn = document.createElement('button');
+      submitBtn.type = 'button'; submitBtn.id = 'submit-quiz'; submitBtn.innerText = 'Submit Quiz';
+      form.appendChild(submitBtn);
+      container.style.display = 'block';
+      container.scrollIntoView({behavior: 'smooth'});
+    }
+
+    async function loadDailyQuiz() {
+      const btn = document.getElementById('start-daily-quiz');
+      btn.disabled = true; btn.innerText = 'Loading…';
+      try {
+        const res = await fetch('/data/daily-quiz.json');
+        if (!res.ok) throw new Error('Failed to load daily quiz.');
+        const data = await res.json();
+        renderQuiz(data);
+      } catch (e) {
+        alert(e.message);
+      } finally {
+        btn.disabled = false; btn.innerText = "Start Today's Quiz";
+      }
+    }
+
+    async function loadCustomQuiz() {
+      const btn = document.getElementById('generate-quiz-btn');
+      const category = document.getElementById('quiz-category').value.trim();
       if (!category) return;
-
-      generateBtn.innerText = 'Generating...';
-      generateBtn.disabled = true;
-
+      btn.disabled = true; btn.innerText = 'Generating…';
       try {
         const res = await fetch('/api/generate-quiz', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ category })
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({category})
         });
-
-        if (!res.ok) {
-          let errMsg = 'Error generating quiz.';
-          try {
-            const errJson = await res.json();
-            errMsg = errJson.error || errMsg;
-          } catch {}
-          throw new Error(errMsg);
-        }
-
+        if (!res.ok) throw new Error('Failed to generate quiz.');
         const data = await res.json();
-        displayCategory.innerText = data.category;
-        questionsList.innerHTML = '';
-
-        data.questions.forEach((qObj) => {
-          const li = document.createElement('li');
-          const questionText = document.createElement('p');
-          questionText.innerText = qObj.question;
-          li.appendChild(questionText);
-
-          const ul = document.createElement('ul');
-          ul.style.listStyleType = 'disc';
-          ul.style.paddingLeft = '1.5rem';
-          qObj.choices.forEach(choice => {
-            const choiceLi = document.createElement('li');
-            choiceLi.innerText = choice;
-            ul.appendChild(choiceLi);
-          });
-          li.appendChild(ul);
-          questionsList.appendChild(li);
-        });
-
-        // Hide quiz sections and show results
-        document.querySelector('.quiz-sections').style.display = 'none';
-        quizResults.style.display = 'block';
-      } catch (err) {
-        console.error(err);
-        alert(err.message);
+        renderQuiz(data);
+      } catch (e) {
+        alert(e.message);
       } finally {
-        generateBtn.innerText = 'Generate Quiz';
-        generateBtn.disabled = false;
+        btn.disabled = false; btn.innerText = 'Generate Quiz';
       }
-    });
+    }
 
-    tryAgainBtn.addEventListener('click', () => {
-      quizResults.style.display = 'none';
-      document.querySelector('.quiz-sections').style.display = 'block';
-      document.getElementById('quiz-category').value = '';
+    document.getElementById('start-daily-quiz').addEventListener('click', loadDailyQuiz);
+    document.getElementById('generate-quiz-btn').addEventListener('click', loadCustomQuiz);
+
+    document.body.addEventListener('click', e => {
+      if (e.target.id === 'submit-quiz') {
+        const data = lastQuizData;
+        let score = 0;
+        data.questions.forEach((q, i) => {
+          const sel = document.querySelector(`input[name="q${i}"]:checked`);
+          const inputs = document.querySelectorAll(`input[name="q${i}"]`);
+          inputs.forEach(inp => {
+            const label = inp.parentElement;
+            if (inp.value === q.answer) {
+              label.style.color = 'green';
+            } else if (inp.checked) {
+              label.style.color = 'red';
+            }
+          });
+          if (sel && sel.value === q.answer) score++;
+        });
+        const form = document.getElementById('quiz-form');
+        const scoreDiv = document.createElement('div');
+        scoreDiv.id = 'quiz-score';
+        scoreDiv.innerText = `You got ${score} out of ${data.questions.length} correct.`;
+        form.insertBefore(scoreDiv, form.firstChild);
+        e.target.disabled = true;
+        const tryBtn = document.createElement('button');
+        tryBtn.id = 'try-again'; tryBtn.innerText = 'Try Again';
+        tryBtn.addEventListener('click', () => location.reload());
+        form.appendChild(tryBtn);
+      }
     });
   </script>
 </body>
