@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>TrivAI – YourDailyPuzzle</title>
   <style>
-    /* Default styling preserved */
     :root {
       --bg: #F2F2F2;
       --card-bg: #FFFFFF;
@@ -18,30 +17,33 @@
     }
     body { margin:0; font-family:'Roboto',sans-serif; background:var(--bg); color:var(--text); }
     .container { max-width:1200px; margin:0 auto; padding:0 1rem; }
-    .site-header { background:var(--card-bg); box-shadow:0 2px 4px rgba(0,0,0,0.05); }
-    .site-header .container { display:flex; justify-content:space-between; align-items:center; padding:1rem 2rem; }
+    header.site-header { background:var(--card-bg); box-shadow:0 2px 4px rgba(0,0,0,0.05); }
+    .site-header .container { display:flex; justify-content:space-between; align-items:center; padding:1rem 0; }
     .logo { font-size:1.5rem; font-weight:700; color:var(--primary); }
     .main-nav a { margin-left:1.5rem; color:var(--text); font-weight:500; text-decoration:none; }
-    .main-nav a.active, .main-nav a:hover { color:var(--primary); }
-    .hero { background:linear-gradient(135deg,var(--gradient-start),var(--gradient-end)); color:#fff; text-align:center; padding:6rem 1rem; }
-    .hero h1 { font-size:2.5rem; font-family:'Poppins',sans-serif; font-weight:600; margin-bottom:1rem; }
-    .hero p { font-size:1.2rem; margin-bottom:2rem; }
-    .quiz-sections { background:var(--card-bg); padding:4rem 2rem; display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:2rem; }
-    .quiz-card { background:var(--card-bg); border-radius:8px; padding:2rem; text-align:center; box-shadow:0 2px 6px rgba(0,0,0,0.05); transition:transform .2s,box-shadow .2s; }
+    .main-nav a:hover, .main-nav a.active { color:var(--primary); }
+    .hero { background:linear-gradient(135deg,var(--gradient-start),var(--gradient-end)); color:#fff; text-align:center; padding:4rem 1rem; }
+    .hero h1 { font-size:2.5rem; font-family:'Poppins',sans-serif; font-weight:600; margin:0; }
+    .hero p { font-size:1.1rem; margin:.5rem 0 0; }
+
+    /* Quiz category cards */
+    .quiz-sections { padding:2rem 0; }
+    .quiz-sections .container { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:1.5rem; }
+    .quiz-card { background:var(--card-bg); border-radius:8px; padding:2rem; text-align:center; box-shadow:0 2px 6px rgba(0,0,0,0.05); transition:transform .2s; }
     .quiz-card:hover { transform:translateY(-4px); box-shadow:0 4px 12px rgba(0,0,0,0.1); border:2px solid var(--primary); }
     .quiz-card h2 { color:var(--primary); font-family:'Poppins',sans-serif; font-weight:600; margin-bottom:.75rem; }
     .quiz-card p { line-height:1.4; margin-bottom:1rem; }
-    .quiz-button, .custom-input button { background:var(--secondary); color:#fff; padding:.6rem 1.2rem; border-radius:4px; font-weight:500; transition:background .2s; cursor:pointer; border:none; }
+    .quiz-card .quiz-button, .quiz-card .custom-input button { background:var(--secondary); color:#fff; padding:.6rem 1.2rem; border:none; border-radius:4px; font-weight:500; cursor:pointer; transition:background .2s; }
     .quiz-button:hover, .custom-input button:hover { background:var(--hover); }
-    .custom-input { display:flex; gap:.5rem; margin-top:1rem; justify-content:center; }
-    .custom-input input { flex:1 1 160px; padding:.5rem 1rem; border:1px solid #ccc; border-radius:4px; }
+    .custom-input { display:flex; gap:.5rem; justify-content:center; margin-top:1rem; }
+    .custom-input input { flex:1; padding:.5rem 1rem; border:1px solid #ccc; border-radius:4px; }
 
-    /* New game-like quiz UI */
+    /* Quiz UI */
     #quiz-container { display:none; background:var(--card-bg); padding:2rem; margin:2rem auto; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.05); max-width:600px; }
     #progress { text-align:right; font-weight:600; margin-bottom:1rem; }
     #question { font-size:1.3rem; margin-bottom:1rem; }
     .options { list-style:none; padding:0; }
-    .options li { margin-bottom:1rem; }
+    .options li { margin-bottom:.75rem; }
     .options input { margin-right:.5rem; }
     #next-btn { margin-top:1rem; }
 
@@ -50,7 +52,7 @@
     #celebration h2 { font-size:1.5rem; color:var(--primary); }
     #play-again { margin-top:1rem; background:var(--primary); color:#fff; padding:.6rem 1.2rem; border:none; border-radius:4px; cursor:pointer; transition:background .2s; }
     #play-again:hover { background:var(--hover); }
-    .confetti { position:absolute; width:8px; height:8px; background:var(--secondary); opacity:0.8; animation:fall 3s linear infinite; }
+    .confetti { position:absolute; width:8px; height:8px; background:var(--secondary); opacity:.8; animation:fall 3s linear infinite; }
     @keyframes fall { 0% { transform:translateY(0) rotate(0deg); opacity:1; } 100% { transform:translateY(800px) rotate(360deg); opacity:0; } }
   </style>
 </head>
@@ -61,40 +63,48 @@
       <nav class="main-nav">
         <a href="trivai.html" class="active">TrivAI</a>
         <a href="escape-room.html">Escape Room</a>
-        <a href="puzzle.html">Puzzle Mode</a>
+        <a href="puzzles.html">Puzzle Mode</a>
         <a href="spot-ai.html">Spot the AI</a>
       </nav>
     </div>
   </header>
 
-  <section class="hero"><div class="container"><h1>TrivAI – Challenge Your Knowledge</h1><p>Daily trivia and custom quizzes—all in one place. Test your smarts every day!</p></div></section>
-
-  <section class="quiz-sections"><div class="container">
-    <div class="quiz-card">
-      <h2>Daily Quiz</h2>
-      <p>10 fresh questions dropped each midnight.</p>
-      <button id="daily-quiz-btn" class="quiz-button">Start Today's Quiz</button>
+  <section class="hero">
+    <div class="container">
+      <h1>TrivAI – Challenge Your Knowledge</h1>
+      <p>Daily trivia and custom quizzes—all in one place. Test your smarts every day!</p>
     </div>
-    <div class="quiz-card">
-      <h2>Custom Quiz (Pro)</h2>
-      <p>Instant 10-question quiz on any topic.</p>
-      <div class="custom-input">
-        <input type="text" id="quiz-category" placeholder="e.g. World Geography">
-        <button id="generate-quiz-btn">Generate Quiz</button>
+  </section>
+
+  <section class="quiz-sections">
+    <div class="container">
+      <div class="quiz-card">
+        <h2>Daily Quiz</h2>
+        <p>10 fresh questions dropped each midnight.</p>
+        <button id="daily-quiz-btn" class="quiz-button">Start Today's Quiz</button>
+      </div>
+      <div class="quiz-card">
+        <h2>Custom Quiz (Pro)</h2>
+        <p>Instant 10-question quiz on any topic.</p>
+        <div class="custom-input">
+          <input type="text" id="quiz-category" placeholder="e.g. World Geography">
+          <button id="generate-quiz-btn">Generate Quiz</button>
+        </div>
       </div>
     </div>
-  </div></section>
+  </section>
 
-  <div id="quiz-container">
-    <div id="progress"></div>
-    <div id="question"></div>
-    <ul class="options" id="options"></ul>
-    <button id="next-btn" class="quiz-button">Next</button>
-  </div>
-
-  <div id="celebration">
-    <h2>🎉 You scored <span id="score"></span>/10! 🎉</h2>
-    <button id="play-again">Play Again</button>
+  <div class="container">
+    <div id="quiz-container">
+      <div id="progress"></div>
+      <div id="question"></div>
+      <ul class="options" id="options"></ul>
+      <button id="next-btn" class="quiz-button">Next</button>
+    </div>
+    <div id="celebration">
+      <h2>🎉 You scored <span id="score"></span>/10! 🎉</h2>
+      <button id="play-again">Play Again</button>
+    </div>
   </div>
 
   <script>
@@ -126,10 +136,10 @@
 
     document.getElementById('next-btn').addEventListener('click', () => {
       const sel = document.querySelector('input[name="opt"]:checked');
-      if(!sel) return alert('Please select an answer!');
-      if(sel.value === quizData[current].answer) score++;
+      if (!sel) return alert('Please select an answer!');
+      if (sel.value === quizData[current].answer) score++;
       current++;
-      if(current < quizData.length) renderQuestion();
+      if (current < quizData.length) renderQuestion();
       else finishQuiz();
     });
 
@@ -137,7 +147,7 @@
       document.getElementById('quiz-container').style.display = 'none';
       document.getElementById('score').innerText = score;
       document.getElementById('celebration').style.display = 'block';
-      if(score >= threshold) launchConfetti();
+      if (score >= threshold) launchConfetti();
     }
 
     document.getElementById('play-again').addEventListener('click', () => {
@@ -146,10 +156,10 @@
     });
 
     function launchConfetti() {
-      for(let i=0; i<75; i++){
+      for (let i=0; i<75; i++){
         const c = document.createElement('div'); c.className='confetti';
-        c.style.left = Math.random()*100+'%'; document.body.appendChild(c);
-        setTimeout(()=>c.remove(), 3000);
+        c.style.left = Math.random()*100 + '%'; document.body.appendChild(c);
+        setTimeout(() => c.remove(), 3000);
       }
     }
 
@@ -158,25 +168,31 @@
       const f = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
       try {
         const res = await fetch(`data/DQ-${f}.json`);
-        if(!res.ok) throw new Error('Quiz not found');
-        const j = await res.json(); startQuiz(j);
-      } catch(e) { alert(e.message); }
+        if (!res.ok) throw new Error('Daily quiz not found');
+        const quiz = await res.json(); startQuiz(quiz);
+      } catch (e) {
+        alert(e.message);
+      }
     });
 
     document.getElementById('generate-quiz-btn').addEventListener('click', async () => {
       const cat = document.getElementById('quiz-category').value.trim();
-      if(!cat) return;
+      if (!cat) return;
       const btn = document.getElementById('generate-quiz-btn');
       btn.innerText = '...'; btn.disabled = true;
       try {
         const res = await fetch('/api/generate-quiz', {
-          method: 'POST', headers: {'Content-Type':'application/json'},
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
           body: JSON.stringify({category:cat})
         });
-        if(!res.ok) throw new Error('Error generating quiz');
-        const j = await res.json(); startQuiz(j);
-      } catch(e) { alert(e.message); }
-      finally { btn.innerText = 'Generate Quiz'; btn.disabled = false; }
+        if (!res.ok) throw new Error('Error generating quiz');
+        const quiz = await res.json(); startQuiz(quiz);
+      } catch (e) {
+        alert(e.message);
+      } finally {
+        btn.innerText = 'Generate Quiz'; btn.disabled = false;
+      }
     });
   </script>
 </body>
