@@ -97,7 +97,7 @@
     }
     document.getElementById('daily-quiz-btn').onclick=async()=>{
       const d=new Date(); const f=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-      try{const res=await fetch(`/data/DQ-${f}.json`); if(!res.ok)throw'Not found'; const data=await res.json(); renderQuiz(data);}catch(e){alert(e);}
+      try{const res=await fetch(`data/DQ-${f}.json`); if(!res.ok)throw'Not found'; const data=await res.json(); renderQuiz(data);}catch(e){alert(e);}
     };
     document.getElementById('generate-quiz-btn').onclick=async()=>{
       const cat=document.getElementById('quiz-category').value.trim(); if(!cat)return;
