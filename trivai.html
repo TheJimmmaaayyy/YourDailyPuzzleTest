@@ -5,360 +5,108 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TrivAI – YourDailyPuzzle</title>
   <style>
+    /* CSS Variables */
     :root {
-      --color-bg: #F2F2F2;
-      --color-bg-alt: #FFFFFF;
-      --color-primary: #1E90FF;
-      --color-secondary: #00BFFF;
-      --color-text: #222222;
-      --color-link: var(--color-primary);
-      --btn-hover: #187bcd;
-      --hero-gradient-start: #2196F3;
-      --hero-gradient-end: #0D47A1;
+      --bg: #F2F2F2;
+      --card-bg: #FFFFFF;
+      --primary: #1E90FF;
+      --secondary: #00BFFF;
+      --text: #222;
+      --hover: #187bcd;
+      --gradient-start: #2196F3;
+      --gradient-end: #0D47A1;
     }
-    body {
-      background: var(--color-bg);
-      color: var(--color-text);
-      margin: 0;
-      font-family: 'Roboto', sans-serif;
-    }
-    a {
-      color: var(--color-link);
-      text-decoration: none;
-      transition: color .2s;
-    }
-    a:hover {
-      color: var(--btn-hover);
-    }
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 1rem;
-    }
-    /* Header */
-    .site-header {
-      background: var(--color-bg-alt);
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    }
-    .site-header .container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-    }
-    .logo {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--color-primary);
-    }
-    .main-nav a {
-      margin-left: 1.5rem;
-      font-weight: 500;
-    }
-    .main-nav .active {
-      color: var(--color-primary);
-      font-weight: 600;
-    }
-    /* Hero */
-    .hero {
-      background: linear-gradient(135deg, var(--hero-gradient-start) 0%, var(--hero-gradient-end) 100%);
-      color: #fff;
-      text-align: center;
-      padding: 6rem 1rem;
-    }
-    .hero h1 {
-      font-family: 'Poppins', sans-serif;
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-    }
-    .hero p {
-      font-size: 1.2rem;
-      margin-bottom: 2rem;
-    }
-    /* Quiz Sections */
-    .quiz-sections {
-      background: var(--color-bg-alt);
-      padding: 4rem 2rem;
-    }
-    .quiz-sections .container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
-      gap: 2rem;
-    }
-    .quiz-card {
-      background: var(--color-bg-alt);
-      border-radius: 8px;
-      padding: 2rem;
-      text-align: center;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-      transition: transform .2s, box-shadow .2s;
-    }
-    .quiz-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      border: 2px solid var(--color-primary);
-    }
-    .quiz-card .icon {
-      margin-bottom: 1rem;
-    }
-    .quiz-card h2 {
-      color: var(--color-primary);
-      font-family: 'Poppins', sans-serif;
-      font-weight: 600;
-      margin-bottom: .75rem;
-    }
-    .quiz-card p {
-      line-height: 1.4;
-      margin-bottom: 1rem;
-    }
-    .quiz-button {
-      background: var(--color-secondary);
-      color: #fff;
-      padding: .6rem 1.2rem;
-      border-radius: 4px;
-      font-weight: 500;
-      transition: background .2s;
-      margin-top: 1rem;
-      display: inline-block;
-      cursor: pointer;
-    }
-    .quiz-button:hover {
-      background: #0091ea;
-    }
-    /* Custom Input */
-    .custom-input {
-      display: flex;
-      justify-content: center;
-      gap: .5rem;
-      margin-top: 1rem;
-    }
-    .custom-input input {
-      flex: 1;
-      padding: .5rem 1rem;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-    .custom-input button {
-      background: var(--color-primary);
-      color: #fff;
-      padding: .5rem 1rem;
-      border: none;
-      border-radius: 4px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background .2s;
-    }
-    .custom-input button:hover {
-      background: var(--btn-hover);
-    }
-    /* Quiz Container */
-    #quiz-container {
-      display: none;
-      background: var(--color-bg-alt);
-      padding: 4rem 2rem;
-      margin: 2rem auto;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-    }
-    #quiz-title {
-      text-align: center;
-      color: var(--color-primary);
-      font-family: 'Poppins', sans-serif;
-      font-weight: 600;
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-    #quiz-form ol {
-      list-style: decimal inside;
-      padding: 0;
-    }
-    #quiz-form li {
-      margin-bottom: 1.5rem;
-    }
-    #quiz-form p {
-      font-weight: 600;
-      margin-bottom: .5rem;
-    }
-    #quiz-form ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    #quiz-form label {
-      display: flex;
-      align-items: center;
-      margin-bottom: .5rem;
-      cursor: pointer;
-    }
-    #quiz-form input[type="radio"] {
-      margin-right: .5rem;
-    }
-    #submit-quiz, #try-again {
-      background: var(--color-primary);
-      color: #fff;
-      padding: .6rem 1.2rem;
-      border: none;
-      border-radius: 4px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: background .2s;
-      display: block;
-      margin: 2rem auto 0;
-    }
-    #submit-quiz:hover, #try-again:hover {
-      background: var(--btn-hover);
-    }
+    body { margin:0; font-family:'Roboto',sans-serif; background:var(--bg); color:var(--text); }
+    .container { max-width:1200px; margin:0 auto; padding:0 1rem; }
+    .site-header { background:var(--card-bg); box-shadow:0 2px 4px rgba(0,0,0,0.05); }
+    .site-header .container { display:flex; justify-content:space-between; align-items:center; padding:1rem 2rem; }
+    .logo { font-size:1.5rem; font-weight:700; color:var(--primary); }
+    .main-nav a { margin-left:1.5rem; color:var(--text); font-weight:500; text-decoration:none; }
+    .main-nav a.active, .main-nav a:hover { color:var(--primary); }
+    .hero { background:linear-gradient(135deg,var(--gradient-start),var(--gradient-end)); color:#fff; text-align:center; padding:6rem 1rem; }
+    .hero h1 { font-size:2.5rem; font-family:'Poppins',sans-serif; font-weight:600; margin-bottom:1rem; }
+    .hero p { font-size:1.2rem; margin-bottom:2rem; }
+    .quiz-sections { background:var(--card-bg); padding:4rem 2rem; display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:2rem; }
+    .quiz-card { background:var(--card-bg); border-radius:8px; padding:2rem; text-align:center; box-shadow:0 2px 6px rgba(0,0,0,0.05); transition:transform .2s,box-shadow .2s; }
+    .quiz-card:hover { transform:translateY(-4px); box-shadow:0 4px 12px rgba(0,0,0,0.1); border:2px solid var(--primary); }
+    .quiz-card h2 { color:var(--primary); font-family:'Poppins',sans-serif; font-weight:600; margin-bottom:.75rem; }
+    .quiz-card p { line-height:1.4; margin-bottom:1rem; }
+    .quiz-button, .custom-input button { background:var(--secondary); color:#fff; padding:.6rem 1.2rem; border-radius:4px; font-weight:500; text-decoration:none; display:inline-block; transition:background .2s; cursor:pointer; border:none; }
+    .quiz-button:hover, .custom-input button:hover { background:var(--hover); }
+    .custom-input { display:flex; gap:.5rem; margin-top:1rem; justify-content:center; }
+    .custom-input input { flex:1 1 160px; padding:.5rem 1rem; border:1px solid #ccc; border-radius:4px; }
+    .quiz-results { display:none; background:var(--card-bg); padding:4rem 2rem; margin-top:2rem; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.05); }
+    .quiz-results h2 { color:var(--primary); text-align:center; font-family:'Poppins',sans-serif; font-weight:600; margin-bottom:1rem; }
+    .quiz-results ol { list-style:decimal inside; max-width:800px; margin:0 auto; line-height:1.6; padding:0; }
+    .quiz-results li { margin-bottom:1.5rem; }
+    .quiz-results li p { font-weight:600; margin-bottom:.5rem; }
+    .quiz-results button { display:block; margin:2rem auto 0; background:var(--primary); padding:.6rem 1.2rem; color:#fff; border:none; border-radius:4px; cursor:pointer; transition:background .2s; }
+    .quiz-results button:hover { background:var(--hover); }
   </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container">
-      <a href="index.html" class="logo">YourDailyPuzzle.com</a>
-      <nav class="main-nav">
-        <a href="index.html">Home</a>
-        <a href="trivai.html" class="active">TrivAI</a>
-        <a href="escape-room.html">Escape Room</a>
-        <a href="puzzles.html">Puzzle Mode</a>
-        <a href="spot-ai.html">Spot the AI</a>
-      </nav>
+  <header class="site-header"><div class="container"><a href="/index.html" class="logo">YourDailyPuzzle.com</a><nav class="main-nav"><a href="/index.html">Home</a><a href="/trivai.html" class="active">TrivAI</a><a href="/escape-room">Escape Room</a><a href="/puzzle">Puzzle Mode</a><a href="/spot-ai">Spot the AI</a></nav></div></header>
+  <section class="hero"><div class="container"><h1>TrivAI – Challenge Your Knowledge</h1><p>Daily trivia and custom quizzes—all in one place. Test your smarts every day!</p></div></section>
+  <section class="quiz-sections container">
+    <div class="quiz-card">
+      <h2>Daily Quiz</h2>
+      <p>Every midnight a new set of 10 multiple-choice questions drops. Topics span history, science, pop culture, and more!</p>
+      <button id="daily-quiz-btn" class="quiz-button">Start Today's Quiz</button>
     </div>
-  </header>
-
-  <section class="hero">
-    <div class="container">
-      <h1>TrivAI – Challenge Your Knowledge</h1>
-      <p>Daily trivia and custom quiz categories in one place. Test yourself and learn something new every day!</p>
-    </div>
-  </section>
-
-  <section class="quiz-sections">
-    <div class="container">
-      <div class="quiz-card">
-        <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="none" stroke="var(--color-primary)" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2c-5.523 0-10 4.477-10 10s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2"/><path d="M9.09 9a3 3 0 0 1 5.82 0c0 2-3 2.25-3 4.5m-.8 4h.8"/></svg>
-        <h2>Daily Multiple-Choice Quiz</h2>
-        <p>A fresh set of 10 questions is released every day at midnight.</p>
-        <button id="start-daily-quiz" class="quiz-button">Start Today's Quiz</button>
-      </div>
-      <div class="quiz-card">
-        <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="none" stroke="var(--color-primary)" stroke-width="2" viewBox="0 0 24 24"><path d="M2 12h20M12 2v20"/></svg>
-        <h2>Custom Category Quiz (Pro)</h2>
-        <p>Type any category below to get an instant 10-question quiz.</p>
-        <div class="custom-input">
-          <input type="text" id="quiz-category" placeholder="e.g. World Geography" />
-          <button id="generate-quiz-btn">Generate Quiz</button>
-        </div>
+    <div class="quiz-card">
+      <h2>Custom Quiz (Pro)</h2>
+      <p>Type any category—“World Geography,” “1990s Hip-Hop,” “Oscar Winners”—and get 10 tailored questions instantly.</p>
+      <div class="custom-input">
+        <input type="text" id="quiz-category" placeholder="e.g. World Geography" />
+        <button id="generate-quiz-btn">Generate Quiz</button>
       </div>
     </div>
   </section>
-
-  <section id="quiz-container">
-    <div id="quiz-title"></div>
-    <form id="quiz-form"></form>
+  <section class="quiz-results container" id="quiz-results">
+    <h2>Quiz: <span id="display-category"></span></h2>
+    <ol id="questions-list"></ol>
+    <button id="try-again">Try Another</button>
   </section>
-
   <script>
-    let lastQuizData = null;
-
-    function renderQuiz(data) {
-      lastQuizData = data;
-      document.querySelector('.quiz-sections').style.display = 'none';
-      const container = document.getElementById('quiz-container');
-      document.getElementById('quiz-title').innerText = data.category;
-      const form = document.getElementById('quiz-form');
-      form.innerHTML = '';
-      const ol = document.createElement('ol');
-      data.questions.forEach((q, i) => {
+    const renderQuiz = data => {
+      document.getElementById('display-category').innerText = data.category;
+      const list = document.getElementById('questions-list');
+      list.innerHTML = '';
+      data.questions.forEach(q => {
         const li = document.createElement('li');
-        const p = document.createElement('p');
-        p.innerText = (i + 1) + '. ' + q.question;
-        li.appendChild(p);
-        const ul = document.createElement('ul');
-        q.choices.forEach(choice => {
-          const label = document.createElement('label');
-          const radio = document.createElement('input');
-          radio.type = 'radio'; radio.name = 'q' + i; radio.value = choice;
-          label.appendChild(radio);
-          label.appendChild(document.createTextNode(choice));
-          ul.appendChild(label);
-        });
-        li.appendChild(ul);
-        ol.appendChild(li);
+        const p = document.createElement('p'); p.innerText = q.question; li.appendChild(p);
+        const ul = document.createElement('ul'); ul.style.listStyle='disc'; ul.style.paddingLeft='1.5rem';
+        q.choices.forEach(c => { const ci = document.createElement('li'); ci.innerText = c; ul.appendChild(ci); });
+        li.appendChild(ul); list.appendChild(li);
       });
-      form.appendChild(ol);
-      const submitBtn = document.createElement('button');
-      submitBtn.type = 'button'; submitBtn.id = 'submit-quiz'; submitBtn.innerText = 'Submit Quiz';
-      form.appendChild(submitBtn);
-      container.style.display = 'block';
-      container.scrollIntoView({behavior: 'smooth'});
-    }
+      document.querySelector('.quiz-sections').style.display='none';
+      document.getElementById('quiz-results').style.display='block';
+    };
 
-    async function loadDailyQuiz() {
-      const btn = document.getElementById('start-daily-quiz');
-      btn.disabled = true; btn.innerText = 'Loading…';
+    document.getElementById('daily-quiz-btn').addEventListener('click', async () => {
+      const d = new Date(); const f = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+      const file = `data/DQ-${f}.json`;
       try {
-        const res = await fetch('data/daily-quiz.json');
-        if (!res.ok) throw new Error('Failed to load daily quiz.');
-        const data = await res.json();
-        renderQuiz(data);
-      } catch (e) {
-        alert(e.message);
-      } finally {
-        btn.disabled = false; btn.innerText = "Start Today's Quiz";
-      }
-    }
+        const res = await fetch(file);
+        if(!res.ok) throw new Error('Daily quiz not available.');
+        const data = await res.json(); renderQuiz(data);
+      } catch(e) { alert(e.message); }
+    });
 
-    async function loadCustomQuiz() {
-      const btn = document.getElementById('generate-quiz-btn');
-      const category = document.getElementById('quiz-category').value.trim();
-      if (!category) return;
-      btn.disabled = true; btn.innerText = 'Generating…';
+    document.getElementById('generate-quiz-btn').addEventListener('click', async ()=>{
+      const cat = document.getElementById('quiz-category').value.trim(); if(!cat) return;
+      const btn = document.getElementById('generate-quiz-btn'); btn.innerText='Generating...'; btn.disabled=true;
       try {
-        const res = await fetch('/api/generate-quiz', {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({category})
-        });
-        if (!res.ok) throw new Error('Failed to generate quiz.');
-        const data = await res.json();
-        renderQuiz(data);
-      } catch (e) {
-        alert(e.message);
-      } finally {
-        btn.disabled = false; btn.innerText = 'Generate Quiz';
-      }
-    }
+        const res = await fetch('/api/generate-quiz',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({category:cat})});
+        if(!res.ok){const err=await res.json().catch(()=>({error:'Error'}));throw new Error(err.error);} 
+        const data=await res.json(); renderQuiz(data);
+      }catch(e){alert(e.message);}finally{btn.innerText='Generate Quiz'; btn.disabled=false;}
+    });
 
-    document.getElementById('start-daily-quiz').addEventListener('click', loadDailyQuiz);
-    document.getElementById('generate-quiz-btn').addEventListener('click', loadCustomQuiz);
-
-    document.body.addEventListener('click', e => {
-      if (e.target.id === 'submit-quiz') {
-        const data = lastQuizData;
-        let score = 0;
-        data.questions.forEach((q, i) => {
-          const sel = document.querySelector(`input[name="q${i}"]:checked`);
-          const inputs = document.querySelectorAll(`input[name="q${i}"]`);
-          inputs.forEach(inp => {
-            const label = inp.parentElement;
-            if (inp.value === q.answer) {
-              label.style.color = 'green';
-            } else if (inp.checked) {
-              label.style.color = 'red';
-            }
-          });
-          if (sel && sel.value === q.answer) score++;
-        });
-        const form = document.getElementById('quiz-form');
-        const scoreDiv = document.createElement('div');
-        scoreDiv.id = 'quiz-score';
-        scoreDiv.innerText = `You got ${score} out of ${data.questions.length} correct.`;
-        form.insertBefore(scoreDiv, form.firstChild);
-        e.target.disabled = true;
-        const tryBtn = document.createElement('button');
-        tryBtn.id = 'try-again'; tryBtn.innerText = 'Try Again';
-        tryBtn.addEventListener('click', () => location.reload());
-        form.appendChild(tryBtn);
-      }
+    document.getElementById('try-again').addEventListener('click',()=>{
+      document.getElementById('quiz-results').style.display='none';
+      document.querySelector('.quiz-sections').style.display='grid';
+      document.getElementById('quiz-category').value='';
     });
   </script>
 </body>
