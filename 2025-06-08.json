@@ -101,12 +101,12 @@
     {
       "id": "pirate_hat",
       "name": "Pirate Hat",
-      "icon": "/assets/items/pirate_hat.png"
+      "icon": "assets/items/pirate_hat.png"
     },
     {
       "id": "brig_key",
       "name": "Brass Key",
-      "icon": "/assets/items/brig_key.png"
+      "icon": "assets/items/brig_key.png"
     }
   ]
 }
