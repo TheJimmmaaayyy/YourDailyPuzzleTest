@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TrivAI – YourDailyPuzzle</title>
   <style>
-    /* Color palette */
     :root {
       --bg: #F2F2F2;
       --card-bg: #FFFFFF;
@@ -35,7 +34,7 @@
     .quiz-card h2 { color: var(--primary); font-family: 'Poppins', sans-serif; font-weight: 600; margin-bottom: .75rem; }
     .quiz-card p { line-height: 1.4; margin-bottom: 1rem; }
     .quiz-card .quiz-button, .quiz-card .custom-input button { background: var(--secondary); color: #fff; padding: .6rem 1.2rem; border: none; border-radius: 4px; font-weight: 500; cursor: pointer; transition: background .2s; }
-    .quiz-button:hover, .custom-input button:hover { background: var(--hover); }
+    .quiz-card .quiz-button:hover, .quiz-card .custom-input button:hover { background: var(--hover); }
     .custom-input { display: flex; gap: .5rem; justify-content: center; margin-top: 1rem; }
     .custom-input input { flex: 1; padding: .5rem 1rem; border: 1px solid #ccc; border-radius: 4px; }
 
@@ -62,8 +61,9 @@
     <div class="container">
       <a href="index.html" class="logo">YourDailyPuzzle.com</a>
       <nav class="main-nav">
+        <a href="index.html">Home</a>
         <a href="trivai.html" class="active">TrivAI</a>
-        <a href="escape-room.html">Escape Room</a>
+        <a href="escape.html">Escape Room</a>
         <a href="puzzles.html">Puzzle Mode</a>
         <a href="spot-ai.html">Spot the AI</a>
       </nav>
@@ -110,59 +110,96 @@
 
   <script>
     let quizData, current=0, score=0, threshold=8;
-    function startQuiz(data){quizData=data.questions;current=0;score=0;
-      document.getElementById('celebration').style.display='none';
-      document.getElementById('quiz-container').style.display='block';
-      document.querySelector('.quiz-sections').style.display='none';
+    function startQuiz(data){
+      quizData = data.questions;
+      current = 0;
+      score = 0;
+      document.getElementById('celebration').style.display = 'none';
+      document.getElementById('quiz-container').style.display = 'block';
+      document.querySelector('.quiz-sections').style.display = 'none';
       renderQuestion();
     }
     function renderQuestion(){
-      document.getElementById('progress').innerText=`Question ${current+1} of ${quizData.length}`;
-      document.getElementById('question').innerText=quizData[current].question;
-      const opts=document.getElementById('options'); opts.innerHTML='';
-      quizData[current].choices.forEach((c,i)=>{
-        const li=document.createElement('li');
-        const input=document.createElement('input');
-        input.type='radio'; input.name='opt'; input.value=c; input.id='o'+i;
-        const label=document.createElement('label');
-        label.htmlFor='o'+i; label.innerText=c;
-        li.appendChild(input); li.appendChild(label);
+      document.getElementById('progress').innerText = \`Question \${current+1} of \${quizData.length}\`;
+      document.getElementById('question').innerText = quizData[current].question;
+      const opts = document.getElementById('options');
+      opts.innerHTML = '';
+      quizData[current].choices.forEach((c,i) => {
+        const li = document.createElement('li');
+        const input = document.createElement('input');
+        input.type = 'radio';
+        input.name = 'opt';
+        input.value = c;
+        input.id = 'o'+i;
+        const label = document.createElement('label');
+        label.htmlFor = 'o'+i;
+        label.innerText = c;
+        li.appendChild(input);
+        li.appendChild(label);
         opts.appendChild(li);
       });
       document.getElementById('next-btn').innerText = current < quizData.length-1 ? 'Next' : 'Submit';
     }
-    document.getElementById('next-btn').onclick=()=>{
-      const sel=document.querySelector('input[name="opt"]:checked');
+    document.getElementById('next-btn').onclick = () => {
+      const sel = document.querySelector('input[name="opt"]:checked');
       if(!sel) return alert('Select an answer!');
-      if(sel.value===quizData[current].answer) score++;
+      if(sel.value === quizData[current].answer) score++;
       current++;
-      if(current<quizData.length) renderQuestion();
+      if(current < quizData.length) renderQuestion();
       else finishQuiz();
     };
     function finishQuiz(){
-      document.getElementById('quiz-container').style.display='none';
-      document.getElementById('score').innerText=score;
-      document.getElementById('celebration').style.display='block';
-      if(score>=threshold) launchConfetti();
+      document.getElementById('quiz-container').style.display = 'none';
+      document.getElementById('score').innerText = score;
+      document.getElementById('celebration').style.display = 'block';
+      if(score >= threshold) launchConfetti();
     }
-    document.getElementById('play-again').onclick=()=>{document.getElementById('celebration').style.display='none';document.querySelector('.quiz-sections').style.display='block';};
+    document.getElementById('play-again').onclick = () => {
+      document.getElementById('celebration').style.display = 'none';
+      document.querySelector('.quiz-sections').style.display = 'grid';
+    };
     function launchConfetti(){
-      for(let i=0;i<100;i++){
-        const c=document.createElement('div');c.className='confetti';
-        c.style.left=Math.random()*100+'%';document.body.appendChild(c);
+      for(let i=0;i<75;i++){
+        const c = document.createElement('div');
+        c.className = 'confetti';
+        c.style.left = Math.random()*100+'%';
+        document.body.appendChild(c);
         setTimeout(()=>c.remove(),3000);
       }
     }
-    document.getElementById('daily-quiz-btn').onclick=async()=>{
-      const d=new Date(),f=\`\${d.getFullYear()}-\${String(d.getMonth()+1).padStart(2,'0')}-\${String(d.getDate()).padStart(2,'0')}\`;
-      try{const res=await fetch(`data/DQ-${f}.json`);if(!res.ok)throw '';const jd=await res.json();startQuiz(jd);}catch{alert('Quiz not found')};
+    document.getElementById('daily-quiz-btn').onclick = async () => {
+      const d = new Date();
+      const f = \`\${d.getFullYear()}-\${String(d.getMonth()+1).padStart(2,'0')}-\${String(d.getDate()).padStart(2,'0')}\`;
+      try {
+        const res = await fetch(`data/DQ-\${f}.json\`);
+        if(!res.ok) throw new Error('Quiz not found');
+        const jd = await res.json();
+        startQuiz(jd);
+      } catch(e) {
+        alert(e.message);
+      }
     };
-    document.getElementById('generate-quiz-btn').onclick=async()=>{
-      const cat=document.getElementById('quiz-category').value.trim();if(!cat)return;
-      const btn=document.getElementById('generate-quiz-btn');btn.innerText='...';btn.disabled=true;
-      try{const res=await fetch('/api/generate-quiz',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({category:cat})});
-        if(!res.ok)throw '';const jd=await res.json();startQuiz(jd);
-      }catch{alert('Error generating quiz')}finally{btn.innerText='Go';btn.disabled=false;};
+    document.getElementById('generate-quiz-btn').onclick = async () => {
+      const cat = document.getElementById('quiz-category').value.trim();
+      if(!cat) return;
+      const btn = document.getElementById('generate-quiz-btn');
+      btn.innerText = '...';
+      btn.disabled = true;
+      try {
+        const res = await fetch('/api/generate-quiz', {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify({category:cat})
+        });
+        if(!res.ok) throw new Error('Error generating quiz');
+        const jd = await res.json();
+        startQuiz(jd);
+      } catch(e) {
+        alert(e.message);
+      } finally {
+        btn.innerText = 'Go';
+        btn.disabled = false;
+      }
     };
   </script>
 </body>
