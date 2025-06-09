@@ -296,7 +296,7 @@
       const btn = document.getElementById('start-daily-quiz');
       btn.disabled = true; btn.innerText = 'Loading…';
       try {
-        const res = await fetch('/data/daily-quiz.json');
+        const res = await fetch('data/daily-quiz.json');
         if (!res.ok) throw new Error('Failed to load daily quiz.');
         const data = await res.json();
         renderQuiz(data);
