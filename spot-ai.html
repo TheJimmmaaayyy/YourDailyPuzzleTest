@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spot the AI – YourDailyPuzzle</title>
+  <style>
+    :root {
+      --bg: #F2F2F2;
+      --card-bg: #FFFFFF;
+      --primary: #388E3C;
+      --secondary: #81C784;
+      --text: #222;
+      --hover: #2E7D32;
+      --gradient-start: #4CAF50;
+      --gradient-end: #2E7D32;
+    }
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Poppins:wght@600&display=swap');
+    body { margin:0; font-family:'Roboto',sans-serif; background:var(--bg); color:var(--text); }
+    .container { max-width:1200px; margin:0 auto; padding:0 1rem; }
+    header.site-header { background:var(--card-bg); box-shadow:0 2px 4px rgba(0,0,0,0.05); }
+    .site-header .container { display:flex; justify-content:space-between; align-items:center; padding:1rem 0; }
+    .logo { font-size:1.5rem; font-weight:700; color:var(--primary); }
+    .main-nav a { margin-left:1.5rem; color:var(--text); font-weight:500; text-decoration:none; }
+    .main-nav a:hover, .main-nav a.active { color:var(--primary); }
+
+    .hero {
+      background:linear-gradient(135deg,var(--gradient-start),var(--gradient-end));
+      color:#fff; text-align:center; padding:4rem 1rem;
+    }
+    .hero h1 {
+      font-size:2.5rem; font-family:'Poppins',sans-serif; font-weight:600; margin:0;
+    }
+    .hero p { font-size:1.1rem; margin:.5rem 0 0; }
+
+    .quiz-sections { padding:2rem 0; }
+    .quiz-sections .container {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+      gap:1.5rem;
+    }
+    .quiz-card {
+      background:var(--card-bg); border-radius:8px; padding:2rem;
+      text-align:center; box-shadow:0 2px 6px rgba(0,0,0,0.05);
+      transition:transform .2s, box-shadow .2s;
+    }
+    .quiz-card:hover {
+      transform:translateY(-4px);
+      box-shadow:0 4px 12px rgba(0,0,0,0.1);
+      border:2px solid var(--primary);
+    }
+    .quiz-card h2 {
+      color:var(--primary);
+      font-family:'Poppins',sans-serif;
+      font-weight:600;
+      margin-bottom:.75rem;
+    }
+    .quiz-card p { line-height:1.4; margin-bottom:1rem; }
+
+    .quiz-button {
+      background:var(--secondary);
+      color:#fff;
+      padding:.6rem 1.2rem;
+      border:none;
+      border-radius:4px;
+      font-weight:500;
+      cursor:pointer;
+      transition:background .2s;
+      display:inline-block;
+      text-decoration:none;
+    }
+    .quiz-button:hover { background:var(--hover); }
+
+    #game-container {
+      display:none;
+      background:var(--card-bg);
+      padding:2rem;
+      margin:2rem auto;
+      border-radius:8px;
+      box-shadow:0 2px 6px rgba(0,0,0,0.05);
+      max-width:800px;
+      text-align:center;
+    }
+    #game-image { max-width:100%; border-radius:8px; margin-bottom:1rem; }
+    .game-controls button { margin:.5rem; }
+    #feedback { margin-top:1rem; font-weight:500; }
+    #score { margin-top:.5rem; font-weight:600; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="logo">YourDailyPuzzle.com</a>
+      <nav class="main-nav">
+        <a href="trivai.html">TrivAI</a>
+        <a href="escape-room.html">Escape Room</a>
+        <a href="puzzles.html">Puzzle Mode</a>
+        <a href="spot-ai.html" class="active">Spot the AI</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h1>Spot the AI</h1>
+      <p>Can you tell which images are AI-generated? Test your observation skills!</p>
+    </div>
+  </section>
+
+  <section class="quiz-sections">
+    <div class="container">
+      <div class="quiz-card">
+        <h2>Daily Mode</h2>
+        <p>Guess 5 images—real or AI—every day and track your score.</p>
+        <button id="daily-btn" class="quiz-button">Start Daily</button>
+      </div>
+      <div class="quiz-card">
+        <h2>Free Play</h2>
+        <p>Practice as much as you want with random images.</p>
+        <button id="free-btn" class="quiz-button">Play Free</button>
+      </div>
+    </div>
+  </section>
+
+  <div id="game-container">
+    <img id="game-image" src="" alt="Spot the AI" />
+    <div id="feedback"></div>
+    <div id="score"></div>
+    <div class="game-controls">
+      <button class="quiz-button" id="btn-real">Real</button>
+      <button class="quiz-button" id="btn-ai">AI</button>
+    </div>
+  </div>
+
+  <script>
+    const dailyImages = [
+      { url: '/assets/images/spot/daily1.jpg', isAI: false },
+      { url: '/assets/images/spot/daily2.jpg', isAI: true },
+      { url: '/assets/images/spot/daily3.jpg', isAI: false },
+      { url: '/assets/images/spot/daily4.jpg', isAI: true },
+      { url: '/assets/images/spot/daily5.jpg', isAI: false }
+    ];
+    const freeImages = [
+      { url: '/assets/images/spot/free1.jpg', isAI: false },
+      { url: '/assets/images/spot/free2.jpg', isAI: false },
+      { url: '/assets/images/spot/free3.jpg', isAI: true },
+      { url: '/assets/images/spot/free4.jpg', isAI: true },
+      { url: '/assets/images/spot/free5.jpg', isAI: false }
+      // add more as needed
+    ];
+    let mode, images = [], index = 0, score = 0;
+    const gameContainer = document.getElementById('game-container');
+    const imgEl = document.getElementById('game-image');
+    const feedbackEl = document.getElementById('feedback');
+    const scoreEl = document.getElementById('score');
+
+    document.getElementById('daily-btn').addEventListener('click', () => start('daily'));
+    document.getElementById('free-btn').addEventListener('click', () => start('free'));
+    document.getElementById('btn-real').addEventListener('click', () => guess(false));
+    document.getElementById('btn-ai').addEventListener('click', () => guess(true));
+
+    function start(selected) {
+      mode = selected;
+      images = mode === 'daily' ? dailyImages : shuffle(freeImages);
+      index = 0; score = 0;
+      feedbackEl.textContent = '';
+      scoreEl.textContent = mode === 'daily' ? `Score: ${score}/${images.length}` : `Score: ${score}`;
+      gameContainer.style.display = 'block';
+      showImage();
+    }
+    function showImage() {
+      imgEl.src = images[index].url;
+    }
+    function guess(isAI) {
+      const correct = images[index].isAI === isAI;
+      feedbackEl.textContent = correct ? 'Correct!' : 'Wrong!';
+      if (correct) score++;
+      scoreEl.textContent = mode === 'daily' ? `Score: ${score}/${images.length}` : `Score: ${score}`;
+      index++;
+      if (mode === 'daily' && index >= images.length) end();
+      else setTimeout(showImage, 800);
+    }
+    function end() {
+      feedbackEl.textContent = `Game Over! Final: ${score}/${images.length}`;
+    }
+    function shuffle(arr) { return arr.sort(() => Math.random() - 0.5); }
+  </script>
+</body>
+</html>
