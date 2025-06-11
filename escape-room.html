@@ -1,40 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Escape Room | YourDailyPuzzle</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Poppins:600">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Escape Room – YourDailyPuzzle</title>
   <style>
     :root {
       --bg: #F2F2F2;
-      --bg-alt: #FFF;
-      --primary: #00A8E8;
-      --text: #222;
-      --intro-start: #FFCDD2;
-      --intro-end: #EF9A9A;
+      --card-bg: #FFFFFF;
+      --primary: #1E90FF;
+      --secondary: #00BFFF;
+      --text: #222222;
+      --hover: #187bcd;
+      --gradient-start: #FFCDD2;
+      --gradient-end: #EF9A9A;
     }
-    body { margin:0; background:var(--bg); font-family:'Roboto',sans-serif; color:var(--text); }
-    a { color:var(--primary); text-decoration:none; }
-    a:hover { text-decoration:underline; }
-    .site-header { background:var(--bg-alt); box-shadow:0 2px 4px rgba(0,0,0,0.05); }
-    .site-header .container { max-width:1200px; margin:0 auto; padding:1rem; display:flex; align-items:center; justify-content:space-between; }
-    .site-header .logo { font-size:1.5rem; font-weight:700; color:var(--primary); }
-    .site-header .main-nav a { margin-left:1rem; font-weight:500; }
-    .site-header .active { color:var(--primary); font-weight:600; }
-    .intro-banner { background:linear-gradient(135deg,var(--intro-start),var(--intro-end)); padding:2rem 1rem; text-align:center; }
-    .intro-banner h1 { margin:0.5rem 0; font-size:2rem; }
-    .room-container { position:relative; max-width:800px; margin:2rem auto; background:#000; }
-    .room-container img { width:100%; display:block; }
-    .hotspot { position:absolute; cursor:pointer; outline:2px dashed rgba(255,0,0,0.2); }
-    .hotspot.hidden, .hotspot.inactive, .hotspot.locked { display:none; }
-    .inventory { display:flex; max-width:800px; margin:1rem auto; background:var(--bg-alt); padding:0.5rem; border-top:1px solid #ccc; box-shadow:0 -2px 4px rgba(0,0,0,0.05); }
-    .inventory .slot { width:60px; height:60px; margin-right:0.5rem; background:#fafafa; border:1px solid #ddd; display:flex; align-items:center; justify-content:center; }
-    .message { position:fixed; bottom:1rem; right:1rem; background:rgba(0,0,0,0.8); color:#fff; padding:0.5rem 1rem; border-radius:4px; display:none; }
-    .countdown { text-align:center; margin:1rem auto; }
-    .countdown h2 { margin:0; font-weight:500; }
-    .countdown .timer { margin-top:0.5rem; font-size:2rem; font-family:'Poppins',sans-serif; }
-    footer { text-align:center; padding:1rem; background:var(--bg-alt); box-shadow:0 -2px 4px rgba(0,0,0,0.05); }
+    body { margin: 0; font-family: 'Roboto', sans-serif; background: var(--bg); color: var(--text); }
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+
+    /* Header (as TrivAI) */
+    header.site-header { background: var(--card-bg); box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+    .site-header .container { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; }
+    .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary); }
+    .main-nav a { margin-left: 1.5rem; color: var(--text); font-weight: 500; }
+    .main-nav a:hover, .main-nav a.active { color: var(--primary); font-weight: 600; }
+
+    /* Intro Banner */
+    .intro-banner { background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%); padding: 2rem 1rem; text-align: center; }
+    .intro-banner h1 { margin: 0 0 .5rem; font-size: 2rem; font-family: 'Poppins', sans-serif; font-weight: 600; }
+    .intro-banner p { margin: 0; font-size: 1rem; }
+
+    /* Room & Hotspots */
+    .room-container { position: relative; max-width: 800px; margin: 2rem auto; background: #000; overflow: hidden; }
+    .room-container img { width: 100%; display: block; }
+    .hotspot { position: absolute; cursor: pointer; outline: 2px dashed rgba(255,0,0,0.2); }
+    .hotspot.hidden, .hotspot.inactive, .hotspot.locked { display: none; }
+
+    /* Inventory */
+    .inventory { display: flex; max-width: 800px; margin: 1rem auto; background: var(--card-bg); padding: .5rem; border-top: 1px solid #ccc; box-shadow: 0 -2px 4px rgba(0,0,0,0.05); }
+    .inventory .slot { width: 60px; height: 60px; margin-right: .5rem; background: #fafafa; border: 1px solid #ddd; display: flex; align-items: center; justify-content: center; }
+    .inventory .slot img { max-width: 100%; max-height: 100%; }
+
+    /* Message Toast */
+    .message { position: fixed; bottom: 1rem; right: 1rem; background: rgba(0,0,0,0.8); color: #fff; padding: .5rem 1rem; border-radius: 4px; display: none; }
+
+    /* Countdown */
+    .countdown { text-align: center; margin: 1rem auto; max-width: 800px; }
+    .countdown h2 { margin: 0; font-weight: 500; }
+    .countdown .timer { margin-top: .5rem; font-size: 2rem; font-family: 'Poppins', sans-serif; font-weight: 600; }
+
+    /* Footer */
+    footer { text-align: center; padding: 1rem; background: var(--card-bg); box-shadow: 0 -2px 4px rgba(0,0,0,0.05); }
   </style>
 </head>
 <body>
@@ -51,8 +69,10 @@
   </header>
 
   <section class="intro-banner">
-    <h1>Escape Room – Test Your Puzzle Prowess</h1>
-    <p>Dive in daily to solve immersive micro-rooms: click, collect, and escape!</p>
+    <div class="container">
+      <h1>Escape Room – Test Your Puzzle Prowess</h1>
+      <p>Dive into a new themed room every day, uncover hidden clues, and solve puzzles to make your escape.</p>
+    </div>
   </section>
 
   <div class="room-container" id="room-container">
@@ -67,7 +87,6 @@
   </section>
 
   <footer>&copy; 2025 YourDailyPuzzle</footer>
-
   <script src="escape-room.js"></script>
 </body>
 </html>
