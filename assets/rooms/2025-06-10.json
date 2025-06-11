@@ -1,7 +1,7 @@
 {
-  "date": "2025-06-08",
+  "date": "2025-06-10",
   "baselineWidth": 800,
-  "backgroundImage": "/assets/rooms/pirate_cabin_bg.png",
+  "backgroundImage": "assets/rooms/pirate_cabin_bg.png",
   "hotspots": [
     {
       "id": "pirate_hat",
@@ -101,12 +101,12 @@
     {
       "id": "pirate_hat",
       "name": "Pirate Hat",
-      "icon": "/assets/items/pirate_hat.png"
+      "icon": "assets/items/pirate_hat.png"
     },
     {
       "id": "brig_key",
       "name": "Brass Key",
-      "icon": "/assets/items/brig_key.png"
+      "icon": "assets/items/brig_key.png"
     }
   ]
 }
