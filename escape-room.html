@@ -2,191 +2,72 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Escape Room | YourDailyPuzzle</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Poppins:600">
   <style>
     :root {
-      --color-bg: #F2F2F2;
-      --color-bg-alt: #FFFFFF;
-      --color-primary: #00A8E8;
-      --color-text: #222222;
-      --color-link: var(--color-primary);
-      --btn-hover: #008CBF;
-      --intro-gradient-start: #FFCDD2;
-      --intro-gradient-end: #EF9A9A;
+      --bg: #F2F2F2;
+      --bg-alt: #FFF;
+      --primary: #00A8E8;
+      --text: #222;
+      --intro-start: #FFCDD2;
+      --intro-end: #EF9A9A;
     }
-    body {
-      background: var(--color-bg);
-      color: var(--color-text);
-      margin: 0;
-      font-family: 'Roboto', sans-serif;
-    }
-    a { color: var(--color-link); text-decoration: none; transition: color .2s; }
-    a:hover { color: var(--btn-hover); text-decoration: underline; }
-    .site-header {
-      background: var(--color-bg-alt);
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-      width: 100%;
-    }
-    .site-header .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem;
-    }
-    .site-header .logo {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--color-primary);
-    }
-    .site-header .main-nav a {
-      margin-left: 1.5rem;
-      font-weight: 500;
-      color: var(--color-text);
-    }
-    .site-header .main-nav a:hover,
-    .site-header .main-nav .active {
-      color: var(--color-primary);
-      font-weight: 600;
-    }
-    .intro-banner {
-      background: linear-gradient(135deg, var(--intro-gradient-start) 0%, var(--intro-gradient-end) 100%);
-      padding: 2rem 1rem;
-      text-align: center;
-    }
-    .intro-banner .container {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    .intro-banner h1 {
-      margin-bottom: 0.5rem;
-      font-size: 2rem;
-      color: var(--color-text);
-    }
-    .intro-banner p {
-      margin: 0;
-      font-size: 1rem;
-      color: var(--color-text);
-    }
-    .room-container {
-      position: relative;
-      width: 800px;
-      max-width: 100%;
-      margin: 2rem auto;
-      background: #000;
-      overflow: hidden;
-    }
-    .room-container img { width: 100%; display: block; }
-    .hotspot { position: absolute; cursor: pointer; }
-    .hotspot.hidden, .hotspot.inactive, .hotspot.locked { display: none; }
-    .inventory {
-      width: 800px;
-      max-width: 100%;
-      margin: 0 auto;
-      background: var(--color-bg-alt);
-      border-top: 1px solid #ccc;
-      display: flex;
-      align-items: center;
-      min-height: 80px;
-      padding: 0.5rem;
-      box-shadow: 0 -2px 4px rgba(0,0,0,0.05);
-    }
-    .inventory .slot { width: 60px; height: 60px; margin-right: 10px; background: #fafafa; border: 1px solid #ddd; display: flex; justify-content: center; align-items: center; }
-    .inventory .slot img { max-width: 100%; max-height: 100%; }
-    .message { position: fixed; bottom: 20px; right: 20px; background: rgba(0,0,0,0.8); color: #fff; padding: 0.5rem 1rem; border-radius: 4px; display: none; }
-    .countdown-banner {
-      text-align: center;
-      margin: 1rem auto;
-    }
-    .countdown-banner h2 { margin: 0; font-size: 1.25rem; font-weight: 500; }
-    .countdown-banner .timer { margin-top: 0.5rem; font-size: 2rem; font-family: 'Poppins', sans-serif; font-weight: 600; }
-    footer { background: var(--color-bg-alt); text-align: center; padding: 1rem; box-shadow: 0 -2px 4px rgba(0,0,0,0.05); }
+    body { margin:0; background:var(--bg); font-family:'Roboto',sans-serif; color:var(--text); }
+    a { color:var(--primary); text-decoration:none; }
+    a:hover { text-decoration:underline; }
+    .site-header { background:var(--bg-alt); box-shadow:0 2px 4px rgba(0,0,0,0.05); }
+    .site-header .container { max-width:1200px; margin:0 auto; padding:1rem; display:flex; align-items:center; justify-content:space-between; }
+    .site-header .logo { font-size:1.5rem; font-weight:700; color:var(--primary); }
+    .site-header .main-nav a { margin-left:1rem; font-weight:500; }
+    .site-header .active { color:var(--primary); font-weight:600; }
+    .intro-banner { background:linear-gradient(135deg,var(--intro-start),var(--intro-end)); padding:2rem 1rem; text-align:center; }
+    .intro-banner h1 { margin:0.5rem 0; font-size:2rem; }
+    .room-container { position:relative; max-width:800px; margin:2rem auto; background:#000; }
+    .room-container img { width:100%; display:block; }
+    .hotspot { position:absolute; cursor:pointer; outline:2px dashed rgba(255,0,0,0.2); }
+    .hotspot.hidden, .hotspot.inactive, .hotspot.locked { display:none; }
+    .inventory { display:flex; max-width:800px; margin:1rem auto; background:var(--bg-alt); padding:0.5rem; border-top:1px solid #ccc; box-shadow:0 -2px 4px rgba(0,0,0,0.05); }
+    .inventory .slot { width:60px; height:60px; margin-right:0.5rem; background:#fafafa; border:1px solid #ddd; display:flex; align-items:center; justify-content:center; }
+    .message { position:fixed; bottom:1rem; right:1rem; background:rgba(0,0,0,0.8); color:#fff; padding:0.5rem 1rem; border-radius:4px; display:none; }
+    .countdown { text-align:center; margin:1rem auto; }
+    .countdown h2 { margin:0; font-weight:500; }
+    .countdown .timer { margin-top:0.5rem; font-size:2rem; font-family:'Poppins',sans-serif; }
+    footer { text-align:center; padding:1rem; background:var(--bg-alt); box-shadow:0 -2px 4px rgba(0,0,0,0.05); }
   </style>
 </head>
 <body>
- <header class="site-header">
+  <header class="site-header">
     <div class="container">
       <a href="index.html" class="logo">YourDailyPuzzle.com</a>
       <nav class="main-nav">
         <a href="trivai.html">TrivAI</a>
-        <a href="escape-room.html">Escape Room</a>
-        <a href="puzzle">Puzzle Mode</a>
-        <a href="spot-ai">Spot the AI</a>
+        <a href="escape-room.html" class="active">Escape Room</a>
+        <a href="puzzle.html">Puzzle Mode</a>
+        <a href="spot-ai.html">Spot the AI</a>
       </nav>
     </div>
   </header>
 
   <section class="intro-banner">
-    <div class="container">
-      <h1>Escape Room &ndash; Test Your Puzzle Prowess</h1>
-      <p>Dive into a new themed room every day, uncover hidden clues, and solve puzzles to make your escape. Are you clever enough to break free?</p>
-    </div>
+    <h1>Escape Room – Test Your Puzzle Prowess</h1>
+    <p>Dive in daily to solve immersive micro-rooms: click, collect, and escape!</p>
   </section>
 
   <div class="room-container" id="room-container">
-    <img id="room-bg" src="" alt="Escape Room">
+    <img id="room-bg" src="" alt="Escape Room Background">
   </div>
   <div class="inventory" id="inventory-bar"></div>
   <div class="message" id="message-box"></div>
 
-  <section class="countdown-banner">
-    <h2>Next room unlocks at <span id="unlock-time">12:00 AM ET</span></h2>
+  <section class="countdown">
+    <h2>Next room unlocks at 12:00 AM ET</h2>
     <div class="timer" id="timer">--:--:--</div>
   </section>
 
-  <footer>
-    &copy; 2025 YourDailyPuzzle
-  </footer>
+  <footer>&copy; 2025 YourDailyPuzzle</footer>
 
-  <script>
-    const gameState = { hotspots: {}, inventory: [] };
-    let puzzleData = null;
-
-    function startCountdown() {
-      const timerEl = document.getElementById('timer');
-      function update() {
-        const now = new Date();
-        const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
-        const et = new Date(utc - (4 * 60 * 60000));
-        const nextMid = new Date(et);
-        nextMid.setHours(24,0,0,0);
-        const diff = nextMid - et;
-        const hrs = String(Math.floor(diff/3600000)).padStart(2,'0');
-        const mins = String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
-        const secs = String(Math.floor((diff%60000)/1000)).padStart(2,'0');
-        timerEl.textContent = `${hrs}:${mins}:${secs}`;
-      }
-      update();
-      setInterval(update, 1000);
-    }
-
-    function loadPuzzle() {
-      const now = new Date();
-      const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
-      const et = new Date(utc - (4 * 60 * 60000));
-      const yyyy = et.getFullYear();
-      const mm = String(et.getMonth()+1).padStart(2,'0');
-      const dd = String(et.getDate()).padStart(2,'0');
-      const dateStr = `${yyyy}-${mm}-${dd}`;
-      console.log('Loading puzzle JSON at:', `/assets/rooms/${dateStr}.json`);
-      fetch(`assets/rooms/${dateStr}.json`)
-        .then(r => { if(!r.ok) throw new Error('No puzzle'); return r.json(); })
-        .then(data => {
-          puzzleData = data;
-          document.getElementById('room-bg').src = data.backgroundImage;
-        })
-        .catch(err => {
-          console.error('Failed to load puzzle:', err);
-          document.getElementById('room-container').innerHTML = '<p style="color:#fff; padding:1rem;">No puzzle today. Come back at midnight ET!</p>';
-        });
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      startCountdown();
-      loadPuzzle();
-    });
-  </script>
+  <script src="escape-room.js"></script>
 </body>
 </html>
