@@ -2,6 +2,13 @@
   "date": "2025-06-10",
   "baselineWidth": 800,
   "backgroundImage": "assets/rooms/pirate_cabin_bg.png",
+  "correctOrder": [
+    "pirate_hat",
+    "ship_wheel",
+    "spyglass_stand",
+    "floorboard",
+    "brig_door"
+  ],
   "hotspots": [
     {
       "id": "pirate_hat",
@@ -15,7 +22,7 @@
       "initialState": "available",
       "onClick": {
         "type": "pickup",
-        "message": "You grabbed the pirate hat and put it on.",
+        "message": "You grabbed the pirate hat. Now you can spin the wheel.",
         "grants": [
           "pirate_hat"
         ]
@@ -35,7 +42,7 @@
       ],
       "onClick": {
         "type": "spin",
-        "message": "You spin the wheel.",
+        "message": "You spin the wheel and hear a click from somewhere.",
         "grants": []
       }
     },
@@ -54,7 +61,7 @@
       },
       "onClick": {
         "type": "inspect",
-        "message": "Through the spyglass you spot a glint.",
+        "message": "Through the spyglass you spot a loose floorboard.",
         "grants": []
       }
     },
@@ -71,7 +78,7 @@
       "revealedBy": "spyglass_stand",
       "onClick": {
         "type": "pickup",
-        "message": "You found a brass key!",
+        "message": "You lifted the floorboard and found a brass key!",
         "grants": [
           "brig_key"
         ]
@@ -92,7 +99,39 @@
       ],
       "onClick": {
         "type": "exit",
-        "message": "The brig door swings open.",
+        "message": "The brig door swings open! You escape victorious!",
+        "grants": []
+      }
+    },
+    {
+      "id": "skull_icon",
+      "shape": {
+        "type": "rect",
+        "x": 700,
+        "y": 50,
+        "width": 50,
+        "height": 50
+      },
+      "initialState": "available",
+      "onClick": {
+        "type": "lose",
+        "message": "A hidden trap springs! You lose and must restart.",
+        "grants": []
+      }
+    },
+    {
+      "id": "anchor_symbol",
+      "shape": {
+        "type": "rect",
+        "x": 750,
+        "y": 300,
+        "width": 40,
+        "height": 40
+      },
+      "initialState": "available",
+      "onClick": {
+        "type": "lose",
+        "message": "Wrong selection! Game over\u2014restart to try again.",
         "grants": []
       }
     }
