@@ -110,7 +110,7 @@ function countdown(){
 function load(){
   const n=new Date(),u=n.getTime()+n.getTimezoneOffset()*60000,e=new Date(u-4*60*60000),
         d=e.getFullYear()+'-'+String(e.getMonth()+1).padStart(2,'0')+'-'+String(e.getDate()).padStart(2,'0');
-  fetch(`/assets/rooms/${d}.json`).then(r=>r.json()).then(data=>{
+  fetch(`assets/rooms/${d}.json`).then(r=>r.json()).then(data=>{
     puzzleData=data;
     const img=document.getElementById('room-bg');
     img.src=data.backgroundImage;
