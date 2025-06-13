@@ -14,24 +14,24 @@
       "id": "pirate_hat",
       "shape": {
         "type": "rect",
-        "x": 50,
-        "y": 400,
-        "width": 100,
-        "height": 100
+        "x": 40,
+        "y": 50,
+        "width": 220,
+        "height": 140
       },
       "initialState": "available",
       "onClick": {
         "type": "pickup",
-        "message": "You picked up the pirate hat. You can now blend in once you escape"
+        "message": "You picked up the pirate hat. Next, spin the wheel to proceed."
       }
     },
     {
       "id": "ship_wheel",
       "shape": {
         "type": "circle",
-        "x": 300,
-        "y": 200,
-        "radius": 100
+        "x": 320,
+        "y": 240,
+        "radius": 140
       },
       "initialState": "inactive",
       "requires": [
@@ -46,10 +46,10 @@
       "id": "pirate_hook",
       "shape": {
         "type": "rect",
-        "x": 500,
-        "y": 100,
-        "width": 80,
-        "height": 120
+        "x": 460,
+        "y": 90,
+        "width": 140,
+        "height": 180
       },
       "initialState": "inactive",
       "requiresState": {
@@ -64,10 +64,10 @@
       "id": "floorboard",
       "shape": {
         "type": "rect",
-        "x": 580,
-        "y": 500,
-        "width": 150,
-        "height": 50
+        "x": 650,
+        "y": 520,
+        "width": 180,
+        "height": 100
       },
       "initialState": "hidden",
       "revealedBy": "pirate_hook",
@@ -80,10 +80,10 @@
       "id": "brig_door",
       "shape": {
         "type": "rect",
-        "x": 100,
-        "y": 150,
-        "width": 150,
-        "height": 300
+        "x": 600,
+        "y": 50,
+        "width": 200,
+        "height": 600
       },
       "initialState": "locked",
       "requires": [
