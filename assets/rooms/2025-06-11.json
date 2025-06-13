@@ -1,0 +1,98 @@
+{
+  "date": "2025-06-11",
+  "baselineWidth": 800,
+  "backgroundImage": "/assets/rooms/pirate_brig_bg.jpg",
+  "correctOrder": [
+    "pirate_hat",
+    "ship_wheel",
+    "pirate_hook",
+    "floorboard",
+    "brig_door"
+  ],
+  "hotspots": [
+    {
+      "id": "pirate_hat",
+      "shape": {
+        "type": "rect",
+        "x": 50,
+        "y": 400,
+        "width": 100,
+        "height": 100
+      },
+      "initialState": "available",
+      "onClick": {
+        "type": "pickup",
+        "message": "You picked up the pirate hat. Next, spin the wheel to proceed."
+      }
+    },
+    {
+      "id": "ship_wheel",
+      "shape": {
+        "type": "circle",
+        "x": 300,
+        "y": 200,
+        "radius": 100
+      },
+      "initialState": "inactive",
+      "requires": [
+        "pirate_hat"
+      ],
+      "onClick": {
+        "type": "spin",
+        "message": "You spin the wheel \u2014 something moves in the shadows."
+      }
+    },
+    {
+      "id": "pirate_hook",
+      "shape": {
+        "type": "rect",
+        "x": 500,
+        "y": 100,
+        "width": 80,
+        "height": 120
+      },
+      "initialState": "inactive",
+      "requiresState": {
+        "ship_wheel": "spin"
+      },
+      "onClick": {
+        "type": "pickup",
+        "message": "You equipped the hook hand. Now pry up the loose floorboard."
+      }
+    },
+    {
+      "id": "floorboard",
+      "shape": {
+        "type": "rect",
+        "x": 580,
+        "y": 500,
+        "width": 150,
+        "height": 50
+      },
+      "initialState": "hidden",
+      "revealedBy": "pirate_hook",
+      "onClick": {
+        "type": "pickup",
+        "message": "You pried up the floorboard with the hook and found a key!"
+      }
+    },
+    {
+      "id": "brig_door",
+      "shape": {
+        "type": "rect",
+        "x": 100,
+        "y": 150,
+        "width": 150,
+        "height": 300
+      },
+      "initialState": "locked",
+      "requires": [
+        "floorboard"
+      ],
+      "onClick": {
+        "type": "exit",
+        "message": "The key turns \u2014 the brig door opens! You escape!"
+      }
+    }
+  ]
+}
