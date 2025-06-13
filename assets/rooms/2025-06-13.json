@@ -1,7 +1,7 @@
 {
   "date": "2025-06-13",
   "baselineWidth": 800,
-  "backgroundImage": "assets/rooms/pirate_brig_bg.png",
+  "backgroundImage": "assets/rooms/pirate_cabin_bg.png",
   "correctOrder": [
     "pirate_hat",
     "ship_wheel",
