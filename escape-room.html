@@ -33,8 +33,10 @@
     .hotspot { position: absolute; cursor: pointer; }
     .hotspot.hidden, .hotspot.inactive, .hotspot.locked { display: none; }
 
-    .inventory { display: flex; max-width: 800px; margin: 1rem auto; background: var(--card-bg); padding: .5rem; border-top: 1px solid #ccc; box-shadow: 0 -2px 4px rgba(0,0,0,0.05); }
-    .inventory .slot { width: 60px; height: 60px; margin-right: .5rem; display: flex; align-items: center; justify-content: center; }
+    .tasks { max-width: 800px; margin: 1rem auto; background: var(--card-bg); padding: 1rem; border-top: 1px solid #ccc; box-shadow: 0 -2px 4px rgba(0,0,0,0.05); }
+    .tasks h3 { margin: 0 0 .5rem; font-size: 1.2rem; }
+    .tasks ul { list-style: none; padding: 0; margin: 0; }
+    .tasks li { padding: .25rem 0; border-bottom: 1px solid #eee; }
 
     .message-box { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.8); color: #fff; padding: .5rem 1rem; border-radius: 4px; display: none; }
 
@@ -68,7 +70,7 @@
   <section class="intro-banner">
     <div class="container">
       <h1>Escape Room – Test Your Puzzle Prowess</h1>
-      <p>Dive into a new themed room every day—click, collect, and escape!</p>
+      <p>Dive into a new themed room every day—complete tasks in order to escape!</p>
     </div>
   </section>
 
@@ -76,7 +78,13 @@
     <img id="room-bg" src="" alt="Escape Room Background">
     <div id="message-box" class="message-box"></div>
   </div>
-  <div class="inventory" id="inventory-bar"></div>
+
+  <section class="tasks">
+    <div class="container">
+      <h3>Tasks Completed</h3>
+      <ul id="task-list"></ul>
+    </div>
+  </section>
 
   <section class="countdown">
     <h2>Next room unlocks at 12:00 AM ET</h2>
