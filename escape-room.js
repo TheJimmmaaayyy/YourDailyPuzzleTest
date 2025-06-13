@@ -159,7 +159,7 @@ function loadPuzzle() {
   const utc = now.getTime() + now.getTimezoneOffset() * 60000;
   const et = new Date(utc - 4 * 60 * 60000);
   const dateStr = `${et.getFullYear()}-${String(et.getMonth() + 1).padStart(2, '0')}-${String(et.getDate()).padStart(2, '0')}`;
-  fetch(`/assets/rooms/${dateStr}.json`)
+  fetch(`assets/rooms/${dateStr}.json`)
     .then(res => res.json())
     .then(data => {
       puzzleData = data;
