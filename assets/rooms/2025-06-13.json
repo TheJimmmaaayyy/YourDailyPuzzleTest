@@ -22,7 +22,7 @@
       "initialState": "available",
       "onClick": {
         "type": "pickup",
-        "message": "You picked up the pirate hat. Next, spin the wheel to proceed."
+        "message": "You picked up the pirate hat. You can now blend in once you escape"
       }
     },
     {
